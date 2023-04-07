@@ -1,27 +1,22 @@
 {
   "dependencies": {
+    "apollo-server-express": "^3.6.2",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "helmet": "^6.0.1",
-    "jsonwebtoken": "^9.0.0",
-    "mongoose": "^7.0.3",
-    "morgan": "^1.10.0",
-    "multer-gridfs-storage": "^5.0.2",
     "graphql": "^16.3.0",
-    "apollo-server-express": "^3.6.2",
-    "axios": "^1.3.5"
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3"
   },
   "name": "bird-brain",
   "description": "A social media project",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +28,8 @@
   "bugs": {
     "url": "https://github.com/samocain93/bird-brain/issues"
   },
-  "homepage": "https://github.com/samocain93/bird-brain#readme"
+  "homepage": "https://github.com/samocain93/bird-brain#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
