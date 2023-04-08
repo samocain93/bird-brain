@@ -5,9 +5,10 @@
     "body-parser": "^1.20.2",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "graphql": "^16.3.0",
+    "express-graphql": "^0.12.0",
+    "graphql": "15.8",
+    "graphql-http": "^1.17.1",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3"
   },
@@ -16,8 +17,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/samocain93/bird-brain#readme",
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "nodemon": "^2.0.22"
   }
 }
