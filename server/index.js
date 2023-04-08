@@ -1,11 +1,12 @@
 const express = require('express');
 const colors = require('colors');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/schema');
 
 const connectDB = require('./config/db');
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3000;
 
 const app = express();
 
