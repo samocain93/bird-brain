@@ -1,7 +1,8 @@
-const { users, posts } = require('../sampleData');
+const { users, posts, comments } = require('../sampleData');
 
 const User = require('../models/User');
 const Post = require('../models/Post');
+const Comment = require('../models/Comment');
 
 // Bring in graphql types
 const {
@@ -78,3 +79,37 @@ const CommentType = new GraphQLObjectType({
 });
 
 /* ROOT QUERY */
+const RootQuery = new GraphQLObjectType({
+  name: 'RootQueryType',
+  fields: {
+    user: {
+      type: UserType,
+      args: { id: { type: GraphQLId } },
+      resolve(parent, args) {
+        return User.findById(args.id);
+      },
+    },
+
+    users: {
+      type: new GraphQLList(UserType),
+      resolve(parent, args) {
+        return User.find();
+      },
+    },
+
+    post: {
+      type: PostType,
+      args: { id: { type: GraphQLId } },
+      resolve(parent, args) {
+        return Post.findById(args.id);
+      },
+    },
+
+    posts: {
+      type: new GraphQLList(PostType),
+      resolve(parent, args) {
+        return Post.find();
+      },
+    },
+  },
+});

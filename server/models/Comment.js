@@ -7,6 +7,11 @@ const commentSchema = new mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    postId: {
+      type: String,
+      required: true,
+      ref: 'Post',
+    },
     firstName: {
       type: String,
       required: true,
@@ -22,10 +27,6 @@ const commentSchema = new mongoose.Schema(
     likes: {
       type: Number,
       default: 0,
-    },
-    comments: {
-      type: Array,
-      default: [],
     },
   },
   {
