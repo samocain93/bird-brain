@@ -66,6 +66,7 @@ const CommentType = new GraphQLObjectType({
     return {
       id: { type: GraphQLId },
       userId: { type: GraphQLId },
+      postId: { type: GraphQLId },
       firstName: { type: GraphQLString },
       lastName: { type: GraphQLString },
       location: { type: GraphQLString },
@@ -73,7 +74,6 @@ const CommentType = new GraphQLObjectType({
       picturePath: { type: GraphQLString },
       userPicturePath: { type: GraphQLString },
       likes: { type: GraphQLInt },
-      comments: { type: GraphQLList(CommentType) },
     };
   },
 });
@@ -111,5 +111,23 @@ const RootQuery = new GraphQLObjectType({
         return Post.find();
       },
     },
+
+    comment: {
+      type: CommentType,
+      args: { id: { type: GraphQLId } },
+      resolve(parent, args) {
+        return Comment.findById(args.id);
+      },
+    },
+
+    comments: {
+      type: new GraphQLList(CommentType),
+      resolve(parent, args) {
+        return Comment.find();
+      },
+    },
   },
 });
+
+
+/* MUTATIONS */
