@@ -1,4 +1,6 @@
-const { users, posts, comments } = require('../sampleData');
+const users = require('../seeds/userData.js');
+const posts = require('../seeds/postData.js');
+const comments = require('../seeds/commentData.js');
 
 const User = require('../models/User');
 const Post = require('../models/Post');
@@ -8,7 +10,7 @@ const Comment = require('../models/Comment');
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLId,
+  GraphQLID,
   GraphQLSchema,
   GraphQLList,
   GraphQLNonNull,
@@ -22,9 +24,8 @@ const {
 // User Type
 const UserType = new GraphQLObjectType({
   name: 'User',
-  fields: () => {
-    return {
-      id: { type: GraphQLId },
+  fields: () => ({
+      id: { type: GraphQLID },
       firstName: { type: GraphQLString },
       lastName: { type: GraphQLString },
       email: { type: GraphQLString },
@@ -36,17 +37,16 @@ const UserType = new GraphQLObjectType({
       occupation: { type: GraphQLString },
       bio: { type: GraphQLString },
       posts: { type: GraphQLList(PostType) },
-    };
-  },
+  }),
 });
+
 
 // Post Type
 const PostType = new GraphQLObjectType({
   name: 'Post',
-  fields: () => {
-    return {
-      id: { type: GraphQLId },
-      userId: { type: GraphQLId },
+  fields: () => ({
+    id: { type: GraphQLID },
+      userId: { type: GraphQLID },
       firstName: { type: GraphQLString },
       lastName: { type: GraphQLString },
       location: { type: GraphQLString },
@@ -55,18 +55,18 @@ const PostType = new GraphQLObjectType({
       userPicturePath: { type: GraphQLString },
       likes: { type: GraphQLInt },
       comments: { type: GraphQLList(CommentType) },
-    };
-  },
+  }),
 });
+
+
 
 // Comment Type
 const CommentType = new GraphQLObjectType({
   name: 'Comment',
-  fields: () => {
-    return {
-      id: { type: GraphQLId },
-      userId: { type: GraphQLId },
-      postId: { type: GraphQLId },
+  fields: () => ({
+      id: { type: GraphQLID },
+      userId: { type: GraphQLID },
+      postId: { type: GraphQLID },
       firstName: { type: GraphQLString },
       lastName: { type: GraphQLString },
       location: { type: GraphQLString },
@@ -74,8 +74,7 @@ const CommentType = new GraphQLObjectType({
       picturePath: { type: GraphQLString },
       userPicturePath: { type: GraphQLString },
       likes: { type: GraphQLInt },
-    };
-  },
+  }),
 });
 
 /* ROOT QUERY */
@@ -84,7 +83,7 @@ const RootQuery = new GraphQLObjectType({
   fields: {
     user: {
       type: UserType,
-      args: { id: { type: GraphQLId } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return User.findById(args.id);
       },
@@ -99,7 +98,7 @@ const RootQuery = new GraphQLObjectType({
 
     post: {
       type: PostType,
-      args: { id: { type: GraphQLId } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Post.findById(args.id);
       },
@@ -114,7 +113,7 @@ const RootQuery = new GraphQLObjectType({
 
     comment: {
       type: CommentType,
-      args: { id: { type: GraphQLId } },
+      args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return Comment.findById(args.id);
       },
@@ -129,5 +128,9 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-
 /* MUTATIONS */
+
+module.exports = new GraphQLSchema({
+  query: RootQuery,
+  // mutation: Mutation,
+});
