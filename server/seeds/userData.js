@@ -2,7 +2,7 @@ const users = [
   {
     id: '14831a7f-89c6-4c5e-906c-838e6ae806ad',
     firstName: 'Neel',
-    lastNamt: 'Edwardes',
+    lastName: 'Edwardes',
     email: 'nedwardes0@phoca.cz',
     password: 'UbBmc5IVesO',
     picturePath: 'http://dummyimage.com/174x100.png/5fa2dd/ffffff',
@@ -16,7 +16,7 @@ const users = [
   {
     id: 'c49a01b0-6c58-4129-8602-c4baf3ebb18b',
     firstName: 'Lorin',
-    lastNamt: 'Cleiment',
+    lastName: 'Cleiment',
     email: 'lcleiment1@nymag.com',
     password: 'SIzTezBi7qG',
     picturePath: 'http://dummyimage.com/158x100.png/ff4444/ffffff',
@@ -30,7 +30,7 @@ const users = [
   {
     id: '20496b36-4227-456e-88df-56b0468d37b2',
     firstName: 'Anthia',
-    lastNamt: 'Ciubutaro',
+    lastName: 'Ciubutaro',
     email: 'aciubutaro2@theatlantic.com',
     password: '0ED6fFM17zg6',
     picturePath: 'http://dummyimage.com/104x100.png/cc0000/ffffff',
@@ -44,7 +44,7 @@ const users = [
   {
     id: '95a30267-bac6-47a1-bf0d-2b9e2cb6484e',
     firstName: 'Gwyneth',
-    lastNamt: 'Millins',
+    lastName: 'Millins',
     email: 'gmillins3@weather.com',
     password: 'Cmv77r9e',
     picturePath: 'http://dummyimage.com/117x100.png/5fa2dd/ffffff',
@@ -58,7 +58,7 @@ const users = [
   {
     id: '7d72155d-1511-46ef-a572-92bd5c8585e6',
     firstName: 'Dalton',
-    lastNamt: 'Isenor',
+    lastName: 'Isenor',
     email: 'disenor4@opensource.org',
     password: 'EiVnMZDAN2mo',
     picturePath: 'http://dummyimage.com/113x100.png/ff4444/ffffff',
@@ -72,7 +72,7 @@ const users = [
   {
     id: 'd8f36694-c071-42d7-95d7-dff74f7ae6e5',
     firstName: 'Felicdad',
-    lastNamt: 'Lemmertz',
+    lastName: 'Lemmertz',
     email: 'flemmertz5@wikispaces.com',
     password: '2mmMQc8',
     picturePath: 'http://dummyimage.com/233x100.png/cc0000/ffffff',
@@ -86,7 +86,7 @@ const users = [
   {
     id: '0053db42-f20e-4ed9-8bfd-32c5a3677220',
     firstName: 'Raeann',
-    lastNamt: 'Instrell',
+    lastName: 'Instrell',
     email: 'rinstrell6@ebay.com',
     password: 'R9okKY',
     picturePath: 'http://dummyimage.com/234x100.png/dddddd/000000',
@@ -100,7 +100,7 @@ const users = [
   {
     id: '45c1f78b-e6c2-44f9-a512-961797008130',
     firstName: 'Mireille',
-    lastNamt: 'Huyhton',
+    lastName: 'Huyhton',
     email: 'mhuyhton7@weibo.com',
     password: 'yQ3r7LIMw',
     picturePath: 'http://dummyimage.com/205x100.png/ff4444/ffffff',
@@ -114,7 +114,7 @@ const users = [
   {
     id: 'ce30ffbe-e1fe-4550-9026-48b1f155ba78',
     firstName: 'Pavel',
-    lastNamt: 'Kiendl',
+    lastName: 'Kiendl',
     email: 'pkiendl8@msu.edu',
     password: 'lTTixY',
     picturePath: 'http://dummyimage.com/150x100.png/5fa2dd/ffffff',
@@ -128,7 +128,7 @@ const users = [
   {
     id: '6437fe4f-7bc1-4c93-8185-9e0752db62c9',
     firstName: 'Katinka',
-    lastNamt: 'Cureton',
+    lastName: 'Cureton',
     email: 'kcureton9@ehow.com',
     password: '17C3pG3n4pES',
     picturePath: 'http://dummyimage.com/137x100.png/ff4444/ffffff',
