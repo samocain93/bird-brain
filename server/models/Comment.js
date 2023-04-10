@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
-const commentSchema = new mongoose.Schema(
+const CommentSchema = new mongoose.Schema(
   {
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'User',
     },
     postId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'Post',
     },
@@ -34,4 +34,4 @@ const commentSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model('Comment', commentSchema);
+module.exports = mongoose.model('Comment', CommentSchema);

@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // connect do DB
-// connectDB();
+connectDB();
 
 app.use(
   '/graphql',

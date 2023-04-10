@@ -2,6 +2,11 @@ const users = require('../seeds/userData.js');
 const posts = require('../seeds/postData.js');
 const comments = require('../seeds/commentData.js');
 
+// Mongoose models
+const User = require('../models/User.js');
+const Post = require('../models/Post.js');
+const Comment = require('../models/Comment.js');
+
 const {
   GraphQLObjectType,
   GraphQLID,
@@ -69,7 +74,7 @@ const RootQuery = new GraphQLObjectType({
     users: {
       type: GraphQLList(UserType),
       resolve(parent, args) {
-        return users;
+        return User.find();
       },
     },
 
@@ -77,7 +82,7 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return users.find((user) => user.id === args.id);
+        return User.findById(args.id);
       },
     },
 
@@ -85,14 +90,14 @@ const RootQuery = new GraphQLObjectType({
       type: PostType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return posts.find((post) => post.id === args.id);
+        return Post.findById(args.id);
       },
     },
 
     posts: {
       type: GraphQLList(PostType),
       resolve(parent, args) {
-        return posts;
+        return Post.find();
       },
     },
 
@@ -100,14 +105,14 @@ const RootQuery = new GraphQLObjectType({
       type: CommentType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return comments.find((comment) => comment.id === args.id);
+        return Comment.findById(args.id);
       },
     },
 
     comments: {
       type: GraphQLList(CommentType),
       resolve(parent, args) {
-        return comments;
+        return Comment.find();
       },
     },
   },
