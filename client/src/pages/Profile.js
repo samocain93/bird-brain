@@ -46,7 +46,7 @@ function Profile() {
           <p>Here's the Bio Display</p>
         </Box>
         </Box>
-        
+        {/*will add grid here to display user's posts. */}
       </Container>
     </ThemeProvider>
     
