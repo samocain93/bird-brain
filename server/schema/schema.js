@@ -1,6 +1,6 @@
-const users = require('../seeds/userData.js');
-const posts = require('../seeds/postData.js');
-const comments = require('../seeds/commentData.js');
+// const users = require('../seeds/userData.js');
+// const posts = require('../seeds/postData.js');
+// const comments = require('../seeds/commentData.js');
 
 // Mongoose models
 const User = require('../models/User.js');
@@ -14,6 +14,7 @@ const {
   GraphQLString,
   GraphQLList,
   GraphQLInt,
+  GraphQLNonNull,
 } = require('graphql');
 
 // User Type
@@ -31,7 +32,7 @@ const UserType = new GraphQLObjectType({
     location: { type: GraphQLString },
     occupation: { type: GraphQLString },
     bio: { type: GraphQLString },
-    posts: { type: GraphQLList(GraphQLID) },
+    posts: { type: GraphQLList(GraphQLID) }
   }),
 });
 
@@ -118,6 +119,225 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+// Mutations
+
+const mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    // Add a user
+    addUser: {
+      type: UserType,
+      args: {
+        firstName: { type: GraphQLNonNull(GraphQLString) },
+        lastName: { type: GraphQLNonNull(GraphQLString) },
+        email: { type: GraphQLNonNull(GraphQLString) },
+        password: { type: GraphQLNonNull(GraphQLString) },
+        picturePath: { type: GraphQLString },
+        friends: { type: GraphQLList(GraphQLID) },
+        age: { type: GraphQLInt },
+        location: { type: GraphQLString },
+        occupation: { type: GraphQLString },
+        bio: { type: GraphQLString },
+        posts: { type: GraphQLList(GraphQLID) },
+      },
+      resolve(parent, args) {
+        let user = new User({
+          firstName: args.firstName,
+          lastName: args.lastName,
+          email: args.email,
+          password: args.password,
+          picturePath: args.picturePath,
+          friends: args.friends,
+          age: args.age,
+          location: args.location,
+          occupation: args.occupation,
+          bio: args.bio,
+          posts: args.posts,
+        });
+        return user.save();
+      },
+    },
+
+    // Delete a user
+    deleteUser: {
+      type: UserType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return User.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a user
+    updateUser: {
+      type: UserType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+        picturePath: { type: GraphQLString },
+        friends: { type: GraphQLList(GraphQLID) },
+        age: { type: GraphQLInt },
+        location: { type: GraphQLString },
+        occupation: { type: GraphQLString },
+        bio: { type: GraphQLString },
+        posts: { type: GraphQLList(GraphQLID) },
+      },
+      resolve(parent, args) {
+        return User.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              firstName: args.firstName,
+              lastName: args.lastName,
+              email: args.email,
+              password: args.password,
+              picturePath: args.picturePath,
+              friends: args.friends,
+              age: args.age,
+              location: args.location,
+              occupation: args.occupation,
+              bio: args.bio,
+              posts: args.posts,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+
+    // Add a post
+    addPost: {
+      type: PostType,
+      args: {
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        firstName: { type: GraphQLNonNull(GraphQLString) },
+        lastName: { type: GraphQLNonNull(GraphQLString) },
+        location: { type: GraphQLString },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        picturePath: { type: GraphQLString },
+        likes: { type: GraphQLInt },
+        comments: { type: GraphQLList(GraphQLID) },
+      },
+      resolve(parent, args) {
+        let post = new Post({
+          userId: args.userId,
+          firstName: args.firstName,
+          lastName: args.lastName,
+          location: args.location,
+          description: args.description,
+          picturePath: args.picturePath,
+          likes: args.likes,
+          comments: args.comments,
+        });
+        return post.save();
+      },
+    },
+
+    // Delete a post
+    deletePost: {
+      type: PostType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Post.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a post
+    updatePost: {
+      type: PostType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+        location: { type: GraphQLString },
+        description: { type: GraphQLString },
+        picturePath: { type: GraphQLString },
+        likes: { type: GraphQLInt },
+        comments: { type: GraphQLList(GraphQLID) },
+      },
+    },
+
+    // Add a comment
+    addComment: {
+      type: CommentType,
+      args: {
+        userId: { type: GraphQLNonNull(GraphQLID) },
+        postId: { type: GraphQLNonNull(GraphQLID) },
+        firstName: { type: GraphQLNonNull(GraphQLString) },
+        lastName: { type: GraphQLNonNull(GraphQLString) },
+        location: { type: GraphQLString },
+        description: { type: GraphQLNonNull(GraphQLString) },
+        picturePath: { type: GraphQLString },
+        userPicturePath: { type: GraphQLString },
+        likes: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        let comment = new Comment({
+          userId: args.userId,
+          postId: args.postId,
+          firstName: args.firstName,
+          lastName: args.lastName,
+          location: args.location,
+          description: args.description,
+          picturePath: args.picturePath,
+          userPicturePath: args.userPicturePath,
+          likes: args.likes,
+        });
+        return comment.save();
+      },
+    },
+
+    // Delete a comment
+    deleteComment: {
+      type: CommentType,
+      args: { id: { type: GraphQLNonNull(GraphQLID) } },
+      resolve(parent, args) {
+        return Comment.findByIdAndRemove(args.id);
+      },
+    },
+
+    // Update a comment
+    updateComment: {
+      type: CommentType,
+      args: {
+        id: { type: GraphQLNonNull(GraphQLID) },
+        userId: { type: GraphQLID },
+        postId: { type: GraphQLID },
+        firstName: { type: GraphQLString },
+        lastName: { type: GraphQLString },
+        location: { type: GraphQLString },
+        description: { type: GraphQLString },
+        picturePath: { type: GraphQLString },
+        userPicturePath: { type: GraphQLString },
+        likes: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        return Comment.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              userId: args.userId,
+              postId: args.postId,
+              firstName: args.firstName,
+              lastName: args.lastName,
+              location: args.location,
+              description: args.description,
+              picturePath: args.picturePath,
+              userPicturePath: args.userPicturePath,
+              likes: args.likes,
+            },
+          },
+          { new: true }
+        );
+      },
+    },
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation,
 });
