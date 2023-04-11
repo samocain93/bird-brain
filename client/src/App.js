@@ -1,13 +1,40 @@
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Body from "./components/Body";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import { 
+  ApolloProvider,
+  ApolloClient,
+  InMemoryCache,
+  createHttpLink } from '@apollo/client';
+
+const httpLink =createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localstorage.getItem('');
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cahce: new InMemoryCache(),
+})
 
 function App() {
   return (
-    <Routes>
+    <ApolloProvider client={client}>
+      <Routes>
       <Route
         path="/"
         element={
@@ -39,6 +66,8 @@ function App() {
         }
       />
     </Routes>
+    </ApolloProvider>
+    
   );
 }
 
