@@ -10,7 +10,11 @@ const theme = createTheme({
       main: "#FDB813",
     },
     secondary: {
-      main: "#FF8F00",
+      main: "#13cefd",
+    },
+    profile_avatar: {
+      main: "#5499C7",
+      bright: "6EAED8",
     },
   },
 });

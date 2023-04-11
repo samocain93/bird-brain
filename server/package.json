@@ -20,6 +20,9 @@
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "seed": "node seeds/seed.js"
+    "watch": "nodemon index.js",
+    "dev": "nodemon server/index.js"
+
   },
   "repository": {
     "type": "git",

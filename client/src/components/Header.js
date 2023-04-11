@@ -18,7 +18,7 @@ const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
 
 function Header() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
