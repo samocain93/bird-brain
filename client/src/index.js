@@ -12,6 +12,10 @@ const theme = createTheme({
     secondary: {
       main: "#FF8F00",
     },
+    profile_avatar: {
+      main: "#5499C7",
+      bright: "6EAED8"
+    }
   },
 });
 
