@@ -7,9 +7,10 @@ function Profile() {
     <ThemeProvider theme={prof_theme}>
       <Container>
         <Grid container
+
+          xs={12}
+
           sx={{
-            width: 1000,
-            height: 200,
             display: "flex",
             alignItems: "center",
             justifyContent: "space-around",
@@ -20,12 +21,15 @@ function Profile() {
             boxShadowBottom: 3,
           }}
         >
-          <Grid item>
+          <Grid item
+            xs={12} md={3}
+          >
             <Avatar
               sx={{
                 width: 100,
                 height: 100,
-                marginLeft: 0,
+                marginTop: 1, marginBottom: 1,
+                marginLeft: 10,
                 fontSize: 40,
                 backgroundColor: "profile_avatar.main",
               }}
@@ -35,14 +39,14 @@ function Profile() {
           </Grid>
           
 
-          <Grid item>
+          <Grid item
+            xs={12} md={9}
+          >
             <Box
               sx={{
-                border: 2,
                 borderRadius: 20,
                 padding: 3,
-                width: 600,
-                height: 175,
+                marginRight: 10,
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "space-around",
@@ -50,7 +54,7 @@ function Profile() {
               id="bio-content"
             >
               <h3> Heres the Name/Username Display </h3> {/* CONTENT DISPLAY */}
-              <p>Here's the Bio Display</p> {/* CONTENT DISPLAY */}
+              <p>Here's the Bio</p> {/* CONTENT DISPLAY */}
             </Box>
           </Grid>
           
