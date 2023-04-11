@@ -36,6 +36,18 @@ const typeDefs = gql`
     post(_id: ID!): Post
     comment(_id: ID!): Comment
   }
+
+  type Mutation {
+    addUser(name: String!, email: String!, password: String!): User
+    addPost(text: String!, image: String): Post
+    addComment(postId: ID!, text: String!): Comment
+    updateUser(_id: ID!, name: String, email: String, password: String): User
+    updatePost(_id: ID!, text: String, image: String): Post
+    updateComment(_id: ID!, text: String): Comment
+    deleteUser(_id: ID!): User
+    deletePost(_id: ID!): Post
+    deleteComment(_id: ID!): Comment
+  }
 `;
 
 module.exports = typeDefs;
