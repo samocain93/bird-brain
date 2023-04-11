@@ -5,10 +5,17 @@ require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/schema');
 
+const { authMiddleware } = require('./utils/auth');
+
 const connectDB = require('./config/db');
 const port = process.env.PORT || 3000;
 
 const app = express();
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: authMiddleware,
+})
 
 // connect do DB
 // connectDB();
