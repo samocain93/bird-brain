@@ -1,5 +1,7 @@
-import { Container, Box, Avatar, Grid, Paper } from "@mui/material";
+import { Container, Box, Avatar, Grid} from "@mui/material";
 import { useTheme, ThemeProvider } from "@mui/material/styles";
+
+import NoteCard from "../components/NoteCard";
 
 function Profile() {
   const prof_theme = useTheme();
@@ -65,20 +67,20 @@ function Profile() {
         for now a sample grid is provided.*/}
           {/* {posts.map(post => (
           <Grid item key={post.id}>
-            <Paper>{ post.content }</Paper>
+            <NoteCard>{ post.content }</NoteCard>
           </Grid>
         ))} */}
-          <Grid item xs={12} md={6}>
-            <Paper>Post 1</Paper>
+          <Grid item xs={12} md={6} lg={4} xl={3}>
+            <NoteCard>Post 1</NoteCard>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper>Post 2</Paper>
+          <Grid item xs={12} md={6} lg={4} xl={3}>
+            <NoteCard>Post 2</NoteCard>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper>Post 3</Paper>
+          <Grid item xs={12} md={6} lg={4} xl={3}>
+            <NoteCard>Post 3</NoteCard>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <Paper>Post 4</Paper>
+          <Grid item xs={12} md={6} lg={4} xl={3}>
+            <NoteCard>Post 4</NoteCard>
           </Grid>
         </Grid>
       </Container>
