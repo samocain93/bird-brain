@@ -4,18 +4,20 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema/schema');
 
-const { authMiddleware } = require('./utils/auth');
+// import graphql schema
+const { typeDefs, resolvers } = require('./schema');
 
-const { typeDefs, resolvers } = require('./schema/schema');
 const db = require('./config/db');
 
 const port = process.env.PORT || 3000;
 const app = express();
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
 
-// connect do DB
-// connectDB();
+const { authMiddleware } = require('./utils/auth');
 
 const startApolloServer = async () => {
   await server.start();
