@@ -9,7 +9,7 @@ const resolvers = {
 
     // return all posts and populate comments
     posts: async () => {
-      return Post.find({}).populate('comments');
+      return Post.find({}).populate('comments').populate('user');
     },
 
     // return a single user
@@ -19,12 +19,12 @@ const resolvers = {
 
     // return a single post
     post: async (parent, args) => {
-      return Post.findById(args.id).populate('comments');
+      return Post.findById(args.id).populate('comments').populate('user');
     },
 
     // return all comments
     comments: async () => {
-      return Comment.find({});
+      return Comment.find({}).populate('user').populate('post');
     },
 
     // return a single comment
@@ -54,16 +54,15 @@ const resolvers = {
 
     // delete a user
     deleteUser: async (parent, args) => {
-      const user = await User.findByIdAndDelete(args.id);
-      return user;
+      return User.findOneAndDelete(args.id);
     },
 
     // delete a post
     deletePost: async (parent, args) => {
       const post = await Post.findByIdAndDelete(args.id);
       return post;
-    }
+    },
   },
 };
 
-module.exports = resolvers;
+module.exports = { resolvers };
