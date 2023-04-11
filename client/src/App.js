@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { setContext } from '@apollo/client/link/context';
 import Layout from "./components/Layout";
 import Body from "./components/Body";
 import Home from "./pages/Home";
@@ -16,7 +17,7 @@ const httpLink =createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localstorage.getItem('');
+  const token = localStorage.getItem('');
 
   return {
     headers: {
@@ -34,38 +35,40 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Routes>
-      <Route
-        path="/"
-        element={
-          <Layout>
-            <Body>
-              <Home />
-            </Body>
-          </Layout>
-        }
-      />
-      <Route
-        path="/profile"
-        element={
-          <Layout>
-            <Body>
-              <Profile />
-            </Body>
-          </Layout>
-        }
-      />
-      <Route
-        path="/friends"
-        element={
-          <Layout>
-            <Body>
-              <Friends />
-            </Body>
-          </Layout>
-        }
-      />
-    </Routes>
+      <Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <Body>
+                  <Home />
+                </Body>
+              </Layout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Layout>
+                <Body>
+                  <Profile />
+                </Body>
+              </Layout>
+            }
+          />
+          <Route
+            path="/friends"
+            element={
+              <Layout>
+                <Body>
+                  <Friends />
+                </Body>
+              </Layout>
+            }
+          />
+        </Routes>
+      </Router>
     </ApolloProvider>
     
   );
