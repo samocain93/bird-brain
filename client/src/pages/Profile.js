@@ -6,7 +6,7 @@ function Profile() {
   return (
     <ThemeProvider theme={prof_theme}>
       <Container>
-        <Box
+        <Grid container
           sx={{
             width: 1000,
             height: 200,
@@ -20,34 +20,41 @@ function Profile() {
             boxShadowBottom: 3,
           }}
         >
-          <Avatar
-            sx={{
-              width: 100,
-              height: 100,
-              marginLeft: 0,
-              fontSize: 40,
-              backgroundColor: "profile_avatar.main",
-            }}
-          >
-          </Avatar>
-          {/* CONTENT DISPLAY */}
-          <Box
-            sx={{
-              border: 2,
-              borderRadius: 20,
-              padding: 3,
-              width: 600,
-              height: 175,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "space-around",
-            }}
-            id="bio-content"
-          >
-            <h3> Heres the Name/Username Display </h3> {/* CONTENT DISPLAY */}
-            <p>Here's the Bio Display</p> {/* CONTENT DISPLAY */}
-          </Box>
-        </Box>
+          <Grid item>
+            <Avatar
+              sx={{
+                width: 100,
+                height: 100,
+                marginLeft: 0,
+                fontSize: 40,
+                backgroundColor: "profile_avatar.main",
+              }}
+            >
+            </Avatar>
+            {/* CONTENT DISPLAY */}
+          </Grid>
+          
+
+          <Grid item>
+            <Box
+              sx={{
+                border: 2,
+                borderRadius: 20,
+                padding: 3,
+                width: 600,
+                height: 175,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "space-around",
+              }}
+              id="bio-content"
+            >
+              <h3> Heres the Name/Username Display </h3> {/* CONTENT DISPLAY */}
+              <p>Here's the Bio Display</p> {/* CONTENT DISPLAY */}
+            </Box>
+          </Grid>
+          
+          </Grid>
 
         <Grid container>
           {/* function below should map all of user's posts to grid once backend is connected, 
