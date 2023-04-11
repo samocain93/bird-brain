@@ -6,10 +6,7 @@
     "@apollo/client": "^3.5.8",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-<<<<<<< Updated upstream
-=======
     "@mui/icons-material": "^5.11.16",
->>>>>>> Stashed changes
     "@mui/material": "^5.11.16",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

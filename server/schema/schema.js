@@ -32,7 +32,12 @@ const UserType = new GraphQLObjectType({
     location: { type: GraphQLString },
     occupation: { type: GraphQLString },
     bio: { type: GraphQLString },
-    posts: { type: GraphQLList(GraphQLID) }
+    posts: {
+      type: PostType,
+      resolve(parent, args) {
+        return Post.find(parent.posts)
+      },
+    },
   }),
 });
 
