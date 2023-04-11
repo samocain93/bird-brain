@@ -1,12 +1,14 @@
 import React from "react";
-import ResponsiveAppBar from "./Header";
+import Header from "./Header";
 import { Container } from "@mui/material";
+import Footer from "./Footer.js";
 
 function Layout(props) {
   return (
     <>
-      <ResponsiveAppBar />
+      <Header />
       <Container fixed>{props.children}</Container>
+      <Footer/>
     </>
   );
 }
