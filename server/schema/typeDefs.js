@@ -8,6 +8,7 @@ const typeDefs = gql`
     password: String
     avatar: String
     posts: [Post]
+    friends: [User]
   }
 
   type Post {
@@ -50,4 +51,4 @@ const typeDefs = gql`
   }
 `;
 
-module.exports = typeDefs;
+module.exports = { typeDefs };
