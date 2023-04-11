@@ -1,23 +1,26 @@
 const express = require('express');
-// const colors = require('colors');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
-const { graphqlHTTP } = require('express-graphql');
+const { authMiddleware } = require('./utils/auth');
+// const { graphqlHTTP } = require('express-graphql');
+// const colors = require('colors');
 
 // import graphql schema
 const { typeDefs, resolvers } = require('./schema');
-
 const db = require('./config/db');
 
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const app = express();
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: authMiddleware,
 });
 
-const { authMiddleware } = require('./utils/auth');
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const startApolloServer = async () => {
   await server.start();
@@ -41,4 +44,4 @@ startApolloServer(typeDefs, resolvers);
 //   })
 // );
 
-app.listen(port, console.log(`Server running on port ${port}`));
+// app.listen(port, console.log(`Server running on port ${port}`));
