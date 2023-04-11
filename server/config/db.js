@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
-const connectDB = async () => {
-  const conn = await mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://127.0.0.1/birdbrain_db',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
-  console.log(`MongoDB Connected: ${conn.connection.host}`.cyan.underline.bold);
-};
-
-module.exports = connectDB;
+module.exports = mongoose.connection;

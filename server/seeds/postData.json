@@ -1,0 +1,13 @@
+
+[
+    {
+        "text": "This is a test post",
+        "image": "http://www.example.com/image.jpg",
+        "likes": 25
+    },
+    {
+        "text": "This is another test post",
+        "image": "http://www.example.com/image2.jpg",
+        "likes": 10
+    }
+]
