@@ -29,7 +29,7 @@ function Friends() {
               }}
               id="bio-content"
             >
-              <Typography variant='h4'> Your Friends </Typography> {/* CONTENT DISPLAY */}
+              <Typography variant='h4'> Your Friends </Typography>
             </Box>
           </Grid>
         </Grid>
@@ -40,7 +40,7 @@ function Friends() {
           justifyContent="center"
           alignItems="center"
         >
-
+          {/* TODO: add javascript functionality to populate friends list */}
           <Grid item xs={12} md={6} lg={4}>
             <FriendNoteCard></FriendNoteCard>
           </Grid>
