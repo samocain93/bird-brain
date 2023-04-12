@@ -17,6 +17,12 @@ const theme = createTheme({
       bright: "6EAED8",
     },
   },
+  typography: {
+    fontFamily: [
+      'Noto Sans Tamil', 
+      'sans-serif',
+    ].join(','),
+  },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
