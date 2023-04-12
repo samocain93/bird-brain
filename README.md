@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
-A social media platform for bird lovers.
+A social media platform for birders.
 
 ## Table of Contents
 
@@ -14,14 +14,19 @@ A social media platform for bird lovers.
 &bull; [Questions](#questions)
 
 ## Installation & Testing
-
+To install the Bird Brain application, start by cloning the repository. Once you have the project on your local machine, navigate to the root directory. From there, install the necessary dependencies using `npm install`. Be sure to create a `.env` file in the root directory and add your own environment variables for the database connection, JWT secret key, and any other necessary variables. To start the application, run `npm start` in the terminal.
 
 ## Usage
 
+[Bird Brain](link)
+
+![Bird Brain image 1](./public/assets/images/bird-brain-1.png)
+![Bird Brain image 2](./public/assets/images/bird-brain-2.png)
+![Bird Brain image 3](./public/assets/images/bird-brain-3.png)
 
 ## License
 
-Copyright © 2023. Distributed under the [MIT](https://opensource.org/licenses/MIT) License.<br>
+Copyright © 2023. Distributed under the [MIT](https://opensource.org/licenses/MIT) License.
 
 ## How to Contribute
 
