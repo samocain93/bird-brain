@@ -13,12 +13,12 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 import { NavLink } from "react-router-dom";
-
+import { Link } from 'react-router-dom'
 const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
 
 function Header() {
-  const isLoggedIn = true;
+  const isLoggedIn = false;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -184,15 +184,23 @@ function Header() {
             )}{" "}
             {!isLoggedIn && (
               <>
+                
+                
                 <Button
                   sx={{ ml: "15px" }}
                   variant="contained"
                   color="secondary"
                 >
+                  <Link to='/Signup'>
                   Register
+                  </Link>
                 </Button>
+              
+
                 <Button sx={{ ml: "15px" }} variant="contained">
+                <Link to='/Login'>
                   Login
+                  </Link>
                 </Button>
               </>
             )}
