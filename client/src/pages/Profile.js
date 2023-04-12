@@ -13,9 +13,6 @@ function Profile() {
           xs={12}
 
           sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-around",
             backgroundColor: "primary.main",
             borderBottomLeftRadius: 20,
             borderBottomRightRadius: 20,
@@ -60,19 +57,13 @@ function Profile() {
               <Typography variant='h6'>Here's the Bio</Typography > {/* CONTENT DISPLAY */}
             </Box>
           </Grid>
-          
-          <Grid item xs={12}>
-              
-          </Grid>
-
-          </Grid>
+        </Grid>
 
         <Grid 
           container
           direction="row"
           justifyContent="center"
           alignItems="center"
-
         >
         
           {/* function below should map all of user's posts to grid once backend is connected, 
