@@ -1,7 +1,7 @@
-import { Container, Box, Avatar, Grid} from "@mui/material";
+import { Container, Box, Avatar, Grid, Typography } from "@mui/material";
 import { useTheme, ThemeProvider } from "@mui/material/styles";
 
-import NoteCard from "../components/NoteCard";
+import ProfileNoteCard from "../components/ProfileNoteCard";
 
 function Profile() {
   const prof_theme = useTheme();
@@ -41,7 +41,8 @@ function Profile() {
           </Grid>
           
 
-          <Grid item
+          <Grid 
+            item
             xs={12} md={9}
           >
             <Box
@@ -55,14 +56,21 @@ function Profile() {
               }}
               id="bio-content"
             >
-              <h3> Heres the Name/Username Display </h3> {/* CONTENT DISPLAY */}
-              <p>Here's the Bio</p> {/* CONTENT DISPLAY */}
+              <Typography variant='h4'> Heres the Name/Username Display </Typography> {/* CONTENT DISPLAY */}
+              <Typography variant='h6'>Here's the Bio</Typography > {/* CONTENT DISPLAY */}
             </Box>
           </Grid>
           
           </Grid>
 
-        <Grid container>
+        <Grid 
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+
+        >
+        
           {/* function below should map all of user's posts to grid once backend is connected, 
         for now a sample grid is provided.*/}
           {/* {posts.map(post => (
@@ -70,17 +78,20 @@ function Profile() {
             <NoteCard>{ post.content }</NoteCard>
           </Grid>
         ))} */}
-          <Grid item xs={12} md={6} lg={4} xl={3}>
-            <NoteCard>Post 1</NoteCard>
+          <Grid item xs={12} md={6} lg={4}>
+            <ProfileNoteCard></ProfileNoteCard>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} xl={3}>
-            <NoteCard>Post 2</NoteCard>
+          <Grid item xs={12} md={6} lg={4}>
+            <ProfileNoteCard></ProfileNoteCard>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} xl={3}>
-            <NoteCard>Post 3</NoteCard>
+          <Grid item xs={12} md={6} lg={4}>
+            <ProfileNoteCard></ProfileNoteCard>
           </Grid>
-          <Grid item xs={12} md={6} lg={4} xl={3}>
-            <NoteCard>Post 4</NoteCard>
+          <Grid item xs={12} md={6} lg={4}>
+            <ProfileNoteCard></ProfileNoteCard>
+          </Grid>
+          <Grid item xs={12} md={6} lg={4}>
+            <ProfileNoteCard></ProfileNoteCard>
           </Grid>
         </Grid>
       </Container>
