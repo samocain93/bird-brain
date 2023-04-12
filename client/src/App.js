@@ -6,6 +6,9 @@ import Body from "./components/Body";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup"
+
 import { 
   ApolloProvider,
   ApolloClient,
@@ -63,6 +66,26 @@ function App() {
               <Layout>
                 <Body>
                   <Friends />
+                </Body>
+              </Layout>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Layout>
+                <Body>
+                  <Login />
+                </Body>
+              </Layout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Layout>
+                <Body>
+                  <Signup />
                 </Body>
               </Layout>
             }

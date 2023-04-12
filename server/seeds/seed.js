@@ -11,6 +11,9 @@ db.once('open', async () => {
   await Post.deleteMany({});
   await Comment.deleteMany({});
 
+  await User.create(userData);
+  await Post.create(postData);
+
   //bulk create each model
   const users = await User.insertMany(userData);
   const posts = await Post.insertMany(postData);
@@ -50,6 +53,6 @@ db.once('open', async () => {
     await post.save();
   }
 
-  console.log('data seeded!');
+  console.log('Data seeded!🌱');
   process.exit(0);
 });
