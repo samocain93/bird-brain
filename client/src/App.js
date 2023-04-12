@@ -1,11 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
 import Layout from "./components/Layout";
 import Body from "./components/Body";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Friends from "./pages/Friends";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup"
+
 import { 
   ApolloProvider,
   ApolloClient,
@@ -29,13 +32,13 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
-  cahce: new InMemoryCache(),
+  cache: new InMemoryCache(),
 })
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Router>
+      
         <Routes>
           <Route
             path="/"
@@ -67,8 +70,28 @@ function App() {
               </Layout>
             }
           />
+          <Route
+            path="/login"
+            element={
+              <Layout>
+                <Body>
+                  <Login />
+                </Body>
+              </Layout>
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Layout>
+                <Body>
+                  <Signup />
+                </Body>
+              </Layout>
+            }
+          />
         </Routes>
-      </Router>
+      
     </ApolloProvider>
     
   );
