@@ -4,27 +4,40 @@ const resolvers = {
   Query: {
     // find all users and populate posts
     users: async () => {
-      return User.find({}).populate('posts');
+      return User.find({}).populate({
+        path: 'posts',
+        populate: { path: 'user', model: User },
+      });
     },
 
     // return all posts and populate comments
     posts: async () => {
-      return Post.find({}).populate('comments').populate('user');
+      return Post.find({}).populate({
+        path: 'comments',
+        populate: { path: 'user', model: User },
+      });
     },
 
     // return a single user
     user: async (parent, args) => {
-      return User.findById(args.id).populate('posts');
+      return User.findOne(args.id)
     },
 
     // return a single post
     post: async (parent, args) => {
-      return Post.findById(args.id).populate('comments').populate('user');
+      return Post.findById(args.id).populate({
+        path: 'comments',
+        populate: { path: 'user', model: User },
+      });
     },
 
     // return all comments
     comments: async () => {
-      return Comment.find({}).populate('user').populate('post');
+      return Comment.find({}).populate({
+        path: 'user',
+        populate: { path: 'post', model: Post },
+      });
+
     },
 
     // return a single comment

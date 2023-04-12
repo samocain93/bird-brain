@@ -3,39 +3,43 @@ const { Schema, model } = require('mongoose');
 const postSchema = new Schema({
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
   },
   text: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
-    type: String
+    type: String,
   },
   likes: {
     type: Number,
-    default: 0
+    default: 0,
   },
   comments: [
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'User',
       },
       text: {
         type: String,
-        required: true
+        required: true,
       },
       date: {
         type: Date,
-        default: Date.now
-      }
-    }
+        default: Date.now,
+      },
+    },
   ],
+  // userId: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  // },
   date: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 const Post = model('Post', postSchema);

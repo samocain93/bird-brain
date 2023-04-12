@@ -31,7 +31,8 @@ db.once('open', async () => {
   for (let i = 0; i < posts.length; i++) {
     const post = posts[i];
     const randomUser = users[Math.floor(Math.random() * users.length)];
-    post.user = randomUser;
+    post.user = randomUser._id;
+    console.log(post)
     await post.save();
   }
 
@@ -52,7 +53,7 @@ db.once('open', async () => {
     post.comments.push(randomComment);
     await post.save();
   }
-
+  
   console.log('Data seeded!🌱');
-  process.exit(0);
+
 });
