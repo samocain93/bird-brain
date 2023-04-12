@@ -5,11 +5,16 @@
     "password": "password123",
     "avatar": "https://example.com/avatar.jpg"
   },
-
   {
     "name": "Jane Smith",
     "email": "janesmith@example.com",
     "password": "secret123",
+    "avatar": "https://example.com/avatar.jpg"
+  },
+  {
+    "name": "Carlos Bautista",
+    "email": "cxlos@cxlos.com",
+    "password": "pass0411",
     "avatar": "https://example.com/avatar.jpg"
   }
 ]
