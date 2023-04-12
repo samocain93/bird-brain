@@ -10,7 +10,7 @@ const theme = createTheme({
       main: "#FDB813",
     },
     secondary: {
-      main: "#13cefd",
+      main: "#e6ac00",
     },
     profile_avatar: {
       main: "#5499C7",
@@ -19,8 +19,8 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Noto Sans Tamil', 
-      'sans-serif',
+      'Lobster', 
+      'Libre Franklin',
     ].join(','),
   },
 });
