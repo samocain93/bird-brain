@@ -4,12 +4,18 @@ const resolvers = {
   Query: {
     // find all users and populate posts
     users: async () => {
-      return User.find({}).populate('posts');
+      return User.find({}).populate({
+        path: 'posts',
+        populate: { path: 'user', model: User },
+      });
     },
 
     // return all posts and populate comments
     posts: async () => {
-      return Post.find({}).populate('comments').populate('user');
+      return Post.find({}).populate({
+        path: 'comments',
+        populate: { path: 'user', model: User },
+      });
     },
 
     // return a single user
