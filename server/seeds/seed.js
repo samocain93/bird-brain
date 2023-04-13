@@ -32,7 +32,7 @@ db.once('open', async () => {
     const post = posts[i];
     const randomUser = users[Math.floor(Math.random() * users.length)];
     post.user = randomUser._id;
-    console.log(post)
+    console.log(post);
     await post.save();
   }
 
@@ -53,7 +53,6 @@ db.once('open', async () => {
     post.comments.push(randomComment);
     await post.save();
   }
-  
-  console.log('Data seeded!🌱');
 
+  console.log('Data seeded!🌱');
 });
