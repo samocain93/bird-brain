@@ -11,16 +11,21 @@ const resolvers = {
     },
 
     // return all posts and populate comments
+    // TODO: this not finding name of user
     posts: async () => {
-      return Post.find({}).populate({
-        path: 'comments',
-        populate: { path: 'user', model: User },
-      });
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .populate('user');
     },
 
     // return a single user
     user: async (parent, args) => {
-      return User.findOne(args.id)
+      return User.findOne(args.id);
     },
 
     // return a single post
@@ -35,9 +40,8 @@ const resolvers = {
     comments: async () => {
       return Comment.find({}).populate({
         path: 'user',
-        populate: { path: 'post', model: Post },
+        populate: { path: 'posts', model: Post },
       });
-
     },
 
     // return a single comment
