@@ -1,4 +1,6 @@
+const { AuthenticationError } = require('apollo-server-express');
 const { User, Post, Comment } = require('../models');
+const { signToken } = require('../utils/auth');
 
 const resolvers = {
   Query: {
@@ -58,8 +60,12 @@ const resolvers = {
     },
 
     // add a post
-    addPost: async (parent, args) => {
-      const post = await Post.create(args);
+    addPost: async (parent, args, context) => {
+      //check if the user is authenticated
+      if (context.user) {
+        throw new AuthenticationError('You must be logged in to add a post')
+      }
+      const post = await Post.create({ ...args, user: context.user._id });
       return post;
     },
 

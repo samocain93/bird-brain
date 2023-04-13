@@ -38,6 +38,17 @@ const typeDefs = gql`
     comment(_id: ID!): Comment
   }
 
+  # Set up an Auth type to handle returning data from a post creating or user login
+  type Auth {
+    token: ID!
+    post: User!
+  }
+
+  input LoginInput {
+    email: String!
+    password: String!
+  }
+
   type Mutation {
     addUser(name: String!, email: String!, password: String!): User
     addPost(text: String!, image: String): Post
@@ -48,6 +59,7 @@ const typeDefs = gql`
     deleteUser(_id: ID!): User
     deletePost(_id: ID!): Post
     deleteComment(_id: ID!): Comment
+    login(input: LoginInput!): Auth
   }
 `;
 
