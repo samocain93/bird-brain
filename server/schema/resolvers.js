@@ -59,9 +59,9 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
+    login: async (parent, { name, password }) => {
       // Look up ther user by the provided email address. Since the `email` field is unique, we know that only one person will exist with that email.
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ name });
 
       // If there is no user with that email address, return an Authentication error stating so
       if (!user) {

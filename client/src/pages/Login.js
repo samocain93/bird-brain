@@ -5,6 +5,7 @@
 // import Auth from '../utils/auth';
 
 // const Login = (props) => {
+
 //     const [formState, setFormState] = useState({ email: '', password: '' });
 //     const [login, { error, data }] = useMutation(LOGIN);
 
@@ -48,6 +49,10 @@
 // export default Login;
 
 import * as React from 'react';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '../utils/mutations'
+import Auth from '../utils/auth';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -78,14 +83,40 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+    const [formState, setFormState] = useState({ 
+      name: '', 
+      password: ''
     });
-  };
+
+    const [login, { error, data }] = useMutation(LOGIN);
+
+    const handleChange = (event) => {
+        const {name, value } = event.target;
+        setFormState({
+            ...formState,
+            [name]: value,
+        });
+    };
+
+    const formSubmit = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        try {
+            const { data } = await login({
+                variables: { ...formState },
+            });
+            Auth.login(data.login.token);
+        } catch (e) {
+            console.error(e);
+        }
+
+        setFormState({
+            name: '',
+            password: '',
+        });
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -103,18 +134,27 @@ export default function SignIn() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+
+          {data ? (
+          <Typography>
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </Typography>
+        ) : (
+
+          <Box component="form" onSubmit={formSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="name"
+              label="Name"
+              name="name"
+              autoComplete="name"
               autoFocus
+              onChange={handleChange}
             />
             <TextField
               margin="normal"
@@ -125,10 +165,7 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              onChange={handleChange}
             />
             <Button
               type="submit"
@@ -139,20 +176,10 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
             </Grid>
           </Box>
+        )}
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
