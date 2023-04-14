@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { borders } from "@mui/system";
+import { Paper } from "@mui/material";
 import FriendNoteCard from "../components/FriendNoteCard";
 
 
@@ -45,18 +45,18 @@ export default function PostCard() {
           sx={{
             width: "345",
             height: "200",
-            backgroundColor: "secondary.main",
+            backgroundColor: "#DAE3F7",
             bottom: "0",
             position: "dynamic",
             paddingTop: "1rem",
             paddingBottom: "1rem",
             border: "3",
-            borderRadius: '16px'
+            borderRadius: "16px",
           }}
         >
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              <Avatar sx={{ bgcolor: "secondary.main" }} aria-label="recipe">
                 R
               </Avatar>
             }
@@ -132,7 +132,12 @@ export default function PostCard() {
           </Collapse>
         </Card>
       </Grid>
+      <Grid Item>
+        <Paper>{FriendNoteCard}</Paper>
+      </Grid>
     </Grid>
 
   );
 }
+
+console.log(FriendNoteCard);

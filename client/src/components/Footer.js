@@ -12,7 +12,7 @@ function Footer(props) {
       sx={{
         width: "100%",
         height: "auto",
-        backgroundColor: "secondary.main",
+        backgroundColor: "primary.main",
         bottom: "0",
         position: "fixed",
         paddingTop: "1rem",
