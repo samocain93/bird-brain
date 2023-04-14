@@ -43,7 +43,6 @@
 
 import * as React from 'react';
 import { useState } from 'react';
-// import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client'
 import { ADD_USER } from '../utils/mutations'
 import Auth from '../utils/auth';
@@ -131,6 +130,12 @@ export default function SignUp() {
             alignItems: 'center',
           }}
         >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
 
           {data ? (
           <Typography>
@@ -138,6 +143,7 @@ export default function SignUp() {
             <Link to="/">back to the homepage.</Link>
           </Typography>
         ) : (
+          
           <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} >
@@ -198,13 +204,6 @@ export default function SignUp() {
             </Grid> 
           </Box>
          )}
-
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
           {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>  */}
           
         </Box>

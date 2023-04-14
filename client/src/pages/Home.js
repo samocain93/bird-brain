@@ -134,18 +134,18 @@ export default function PostCard() {
       </Grid>
     </Grid>
 
-      {loading === false
-        ? posts.map((post) => {
-            return (
-              <div>
-                <h3>{post.user.name}</h3>
-                <p>{post.text}</p>
-                <p>Likes: {post.likes}</p>
-                <p>Comments: {post.comments.length}</p>
-              </div>
-            );
-          })
-        : 'Loading...'}
-    </Container>
+      // {loading === false
+      //   ? posts.map((post) => {
+      //       return (
+      //         <div>
+      //           <h3>{post.user.name}</h3>
+      //           <p>{post.text}</p>
+      //           <p>Likes: {post.likes}</p>
+      //           <p>Comments: {post.comments.length}</p>
+      //         </div>
+      //       );
+      //     })
+      //   : 'Loading...'}
+    // </Container>
   );
 }
