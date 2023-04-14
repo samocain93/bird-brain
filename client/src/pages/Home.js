@@ -11,7 +11,7 @@ function Home() {
       <div>
         <h1>This is the Home Page</h1>
       </div>
-
+      {/* CAN DELETE THIS, THS WAS TO TEST RENDERING THE QUERIES - Sam */}
       {loading === false
         ? posts.map((post) => {
             return (

@@ -27,14 +27,15 @@ const resolvers = {
 
     // return a single user
     user: async (parent, args) => {
-      return User.findOne(args.id);
+      return User.findOne(args.id).populate({
+        path: 'posts',
+      });
     },
 
     // return a single post
     post: async (parent, args) => {
-      return Post.findById(args.id).populate({
-        path: 'comments',
-        populate: { path: 'user', model: User },
+      return Post.findOne(args.id).populate({
+        path: 'user',
       });
     },
 
@@ -63,7 +64,7 @@ const resolvers = {
     addPost: async (parent, args, context) => {
       //check if the user is authenticated
       if (context.user) {
-        throw new AuthenticationError('You must be logged in to add a post')
+        throw new AuthenticationError('You must be logged in to add a post');
       }
       const post = await Post.create({ ...args, user: context.user._id });
       return post;
