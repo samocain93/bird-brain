@@ -16,7 +16,7 @@ function Home() {
         ? posts.map((post) => {
             return (
               <div>
-                <h3>{post.user.name}</h3>
+                <h3>{post.user}</h3>
                 <p>{post.text}</p>
                 <p>Likes: {post.likes}</p>
                 <p>Comments: {post.comments.length}</p>
