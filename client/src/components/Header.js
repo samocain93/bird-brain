@@ -14,13 +14,26 @@ import MenuItem from "@mui/material/MenuItem";
 import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import Auth from '../utils/auth';
 const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
 
+
 function Header() {
-  const isLoggedIn = false;
+  // const isLoggedIn = false;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  
+  React.useEffect (()=>{
+    debugger
+    const get = Auth.getToken();
+    if(get) {
+      if (Auth.isTokenExpired(get) && Auth.loggedIn()) {
+        setLoggedIn(true);
+      }
+    }
+  }) 
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -151,7 +164,7 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isLoggedIn && (
+            {loggedIn && (
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -182,7 +195,7 @@ function Header() {
                 </Menu>
               </>
             )}{" "}
-            {!isLoggedIn && (
+            {!loggedIn && (
               <>
                 
                 

@@ -59,17 +59,17 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { name, password }) => {
+    login: async (parent, { input }) => {
       // Look up ther user by the provided email address. Since the `email` field is unique, we know that only one person will exist with that email.
-      const user = await User.findOne({ name });
+      const user = await User.findOne({ name: input.name });
 
       // If there is no user with that email address, return an Authentication error stating so
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        throw new AuthenticationError('No user found with this name');
       }
 
       // If there is a user found, execute the `isCorrectPassword` instance method and check if the correct password was provided
-      const correctPw = await user.isCorrectPassword(password);
+      const correctPw = await user.isCorrectPassword(input.password);
 
       // If the password is incorrect, return an Authentication error stating so
       if (!correctPw) {
