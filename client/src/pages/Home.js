@@ -18,6 +18,8 @@ import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { borders } from "@mui/system";
 import FriendNoteCard from "../components/FriendNoteCard";
 
+
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -131,5 +133,6 @@ export default function PostCard() {
         </Card>
       </Grid>
     </Grid>
+
   );
 }
