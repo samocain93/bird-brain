@@ -41,14 +41,15 @@ export default function PostCard() {
       <Grid item xs={6}>
         <Card
           sx={{
-            width: "auto",
-            height: "auto",
+            width: "345",
+            height: "200",
             backgroundColor: "secondary.main",
             bottom: "0",
-            position: "fixed",
+            position: "dynamic",
             paddingTop: "1rem",
             paddingBottom: "1rem",
-            border: 1,
+            border: "3",
+            borderRadius: '16px'
           }}
         >
           <CardHeader
