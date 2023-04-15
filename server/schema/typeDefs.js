@@ -41,11 +41,11 @@ const typeDefs = gql`
   # Set up an Auth type to handle returning data from a post creating or user login
   type Auth {
     token: ID!
-    post: User!
+    user: User!
   }
 
   input LoginInput {
-    email: String!
+    name: String!
     password: String!
   }
 

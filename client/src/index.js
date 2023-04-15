@@ -10,10 +10,13 @@ const theme = createTheme({
       main: "#FDB813",
     },
     secondary: {
-      main: "#e6ac00",
+      main: "#fdd471", 
+      // #e6ac00
+
+      // brown color #8E7E71
     },
     profile_avatar: {
-      main: "#5499C7",
+      main: "#f3f0ec",
       bright: "6EAED8",
     },
   },

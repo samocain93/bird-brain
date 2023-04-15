@@ -1,53 +1,14 @@
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { useMutation } from '@apollo/client';
-// import { ADD_USER } from '..utils/mutations';
-// import Auth from '../utils/auth';
-
-// const Signup = () => {
-//     const [formState, setFormState] = useState({
-//         username: '',
-//         email: '',
-//         password: '',
-//     });
-
-//     const [addUser, { error, data }] = useMutation(ADD_USER);
-
-//     const submitForm = async (event) => {
-//         event.preventDefault();
-//         console.log(formState);
-
-//         try {
-//             const { data } = await addUser({
-//                 variables: { ...formState },
-//             });
-
-//             Auth.login(data.addUser.token);
-//         } catch (e) {
-//             console.error(e);
-//         }
-//     };
-
-//     return (
-//         <main>
-//             <div>
-//                 <div>
-                    
-//                 </div>
-//             </div>
-//         </main>
-//     );
-// };
-
-// export default Signup;
-
 import * as React from 'react';
+import { useState } from 'react';
+import { useMutation } from '@apollo/client'
+import { ADD_USER } from '../utils/mutations'
+import Auth from '../utils/auth';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -56,30 +17,50 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
+
+      const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        password: '',
     });
-  };
+
+    const [addUser, { error, data }] = useMutation(ADD_USER);
+
+    const handleChange = (event) => {
+      const { name, value } = event.target;
+  
+      setFormState({
+        ...formState,
+        [name]: value,
+      });
+    };
+
+    const submitForm = async (event) => {
+        event.preventDefault();
+        console.log(formState);
+
+        try {
+            const { data } = await addUser({
+                variables: { ...formState },
+            });
+
+            Auth.login(data.addUser.token);
+        } catch (e) {
+            console.error(e);
+        }
+    };
 
   return (
     <ThemeProvider theme={theme}>
@@ -99,20 +80,29 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+
+          {data ? (
+          <Typography>
+            Success! You may now head{' '}
+            <Link to="/">back to the homepage.</Link>
+          </Typography>
+        ) : (
+          
+          <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} >
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoComplete="first-name"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
-                  label="First Name"
+                  id="name"
+                  label="Name"
                   autoFocus
+                  onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -121,15 +111,16 @@ export default function SignUp() {
                   name="lastName"
                   autoComplete="family-name"
                 />
-              </Grid>
+              </Grid>  */}
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -141,12 +132,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
+                  onChange={handleChange}
                 />
               </Grid>
             </Grid>
@@ -159,15 +145,16 @@ export default function SignUp() {
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
+            </Grid> 
           </Box>
+         )}
+          {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>  */}
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">
+              {error.message}
+            </div>
+          )}
         </Box>
-        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

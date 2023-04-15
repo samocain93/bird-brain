@@ -9,16 +9,18 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+// import { red } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { borders } from "@mui/system";
+import { Paper } from "@mui/material";
 import FriendNoteCard from "../components/FriendNoteCard";
-
-
+// import InputUnstyled from '@mui/base/InputUnstyled';
+import Input from '@mui/joy/Input';
+// import Textarea from '@mui/joy/Textarea';
+import TextField from '@mui/material/TextField';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -32,6 +34,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function PostCard() {
+
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
@@ -40,23 +43,44 @@ export default function PostCard() {
 
   return (
     <Grid container spacing={2}>
+      {/* <Textarea 
+      placeholder="What are you thinking today?" 
+      minrows={2}
+      />  */}
+      {/* <Input 
+      placeholder="What are you thinking today?"
+      sx={{
+        width: "320px",
+        marginTop: "3rem",
+        padding: "2rem",
+        borderRadius: "16px",
+      }}
+      /> */}
+      <TextField 
+        backgroundColor= "#DAE3F7"
+        margin= "10rem"
+        placeholder="What are you thinking today?"
+        border="5 px"
+        borderRadius="2rem"
+      />
       <Grid item xs={6}>
         <Card
           sx={{
             width: "345",
             height: "200",
-            backgroundColor: "secondary.main",
+            backgroundColor: "#DAE3F7",
             bottom: "0",
             position: "dynamic",
             paddingTop: "1rem",
+            marginTop: "3rem",
             paddingBottom: "1rem",
             border: "3",
-            borderRadius: '16px'
+            borderRadius: "16px",
           }}
         >
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+              <Avatar sx={{ bgcolor: "secondary.main"}} aria-label="recipe">
                 R
               </Avatar>
             }
@@ -132,7 +156,25 @@ export default function PostCard() {
           </Collapse>
         </Card>
       </Grid>
+      <Grid Item>
+        <Paper>{FriendNoteCard}</Paper>
+      </Grid>
     </Grid>
 
+      // {loading === false
+      //   ? posts.map((post) => {
+      //       return (
+      //         <div>
+      //           <h3>{post.user.name}</h3>
+      //           <p>{post.text}</p>
+      //           <p>Likes: {post.likes}</p>
+      //           <p>Comments: {post.comments.length}</p>
+      //         </div>
+      //       );
+      //     })
+      //   : 'Loading...'}
+    // </Container>
   );
 }
+
+console.log(FriendNoteCard);
