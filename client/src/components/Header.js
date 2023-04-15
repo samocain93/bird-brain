@@ -156,10 +156,10 @@ function Header() {
               <Button
                 key={page}
                 component={NavLink}
+                to={`/${page.toLowerCase()}`}
                 style={({ isActive }) => ({
                   color: isActive ? "#FFFFFF" : "#000000",
                 })}
-                to={`/${page.toLowerCase()}`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -201,7 +201,12 @@ function Header() {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem 
+                    key={setting} 
+                    onClick={handleCloseUserMenu}
+                    component={NavLink}
+                    to={`/${setting.toLowerCase()}`}
+                    >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
