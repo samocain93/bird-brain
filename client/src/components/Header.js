@@ -13,27 +13,26 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 import { NavLink } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import Auth from '../utils/auth';
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
-
 
 function Header() {
   // const isLoggedIn = false;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
-  
-  React.useEffect (()=>{
-    debugger
+
+  React.useEffect(() => {
+    //  debugger
     const get = Auth.getToken();
-    if(get) {
+    if (get) {
       if (Auth.isTokenExpired(get) && Auth.loggedIn()) {
         setLoggedIn(true);
       }
     }
-  }) 
+  });
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -164,7 +163,7 @@ function Header() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {loggedIn && (
+            {!loggedIn && (
               <>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -192,28 +191,22 @@ function Header() {
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
+                  
                 </Menu>
               </>
             )}{" "}
-            {!loggedIn && (
+            {loggedIn && (
               <>
-                
-                
                 <Button
                   sx={{ ml: "15px" }}
                   variant="contained"
                   color="secondary"
                 >
-                  <Link to='/Signup'>
-                  Register
-                  </Link>
+                  <Link to="/Signup">Register</Link>
                 </Button>
-              
 
                 <Button sx={{ ml: "15px" }} variant="contained">
-                <Link to='/Login'>
-                  Login
-                  </Link>
+                  <Link to="/Login">Login</Link>
                 </Button>
               </>
             )}

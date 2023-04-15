@@ -17,8 +17,10 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import { Paper } from "@mui/material";
 import FriendNoteCard from "../components/FriendNoteCard";
-
-
+import Auth from "../utils/auth";
+import { TextField, Button } from "@mui/material";
+import { useMutation } from "@apollo/client";
+import { ADD_POST } from "../utils/mutations";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -34,12 +36,37 @@ const ExpandMore = styled((props) => {
 export default function PostCard() {
   const [expanded, setExpanded] = React.useState(false);
 
+  const [addPost, {error}] = useMutation(ADD_POST); 
+  const [postvalue, setpostvalue] = React.useState("");
+  //   const userInfo = Auth.getProfile();
+  //   console.log(userInfo);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+   async function submit() { 
+      const {data} = await addPost({
+         variables: {text:postvalue}
+      });
+  }
 
   return (
     <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <TextField
+          id="new-post"
+          label="Multiline"
+          multiline
+          maxRows={4}
+          variant="filled"
+          value={postvalue}
+          onChange={(event) => {
+          setpostvalue(event.target.value);
+          }}
+        />
+        <Button variant="text" onClick={submit}>Submit</Button>
+      </Grid>
       <Grid item xs={6}>
         <Card
           sx={{
@@ -133,24 +160,24 @@ export default function PostCard() {
         </Card>
       </Grid>
       <Grid Item>
-        <Paper>{FriendNoteCard}</Paper>
+        <Paper><FriendNoteCard /></Paper>
       </Grid>
     </Grid>
 
-      // {loading === false
-      //   ? posts.map((post) => {
-      //       return (
-      //         <div>
-      //           <h3>{post.user.name}</h3>
-      //           <p>{post.text}</p>
-      //           <p>Likes: {post.likes}</p>
-      //           <p>Comments: {post.comments.length}</p>
-      //         </div>
-      //       );
-      //     })
-      //   : 'Loading...'}
+    // {loading === false
+    //   ? posts.map((post) => {
+    //       return (
+    //         <div>
+    //           <h3>{post.user.name}</h3>
+    //           <p>{post.text}</p>
+    //           <p>Likes: {post.likes}</p>
+    //           <p>Comments: {post.comments.length}</p>
+    //         </div>
+    //       );
+    //     })
+    //   : 'Loading...'}
     // </Container>
   );
 }
 
-console.log(FriendNoteCard);
+
