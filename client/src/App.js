@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
 import Layout from "./components/Layout";
