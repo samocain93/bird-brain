@@ -3,19 +3,11 @@ import { gql } from '@apollo/client';
 export const QUERY_POSTS = gql`
   query getPosts {
     posts {
-      user {
-        name
-      }
       text
       likes
-      comments {
-        text
-        user {
-          name
-        }
+      createdAt
       }
     }
-  }
 `;
 
 export const QUERY_POST = gql`
@@ -63,12 +55,11 @@ export const QUERY_ME = gql`
   query me {
     me {
       _id
-      username
+      name
       email
-      thoughts {
+      posts {
         _id
-        thoughtText
-        thoughtAuthor
+        text
         createdAt
       }
     }
