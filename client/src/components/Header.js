@@ -34,7 +34,7 @@ function Header() {
     // debugger
     const get = Auth.getToken();
     if(get) {
-       (Auth.isTokenExpired(get) && Auth.loggedIn()); {
+       Auth.isTokenExpired(get) && Auth.loggedIn(); {
         setLoggedIn(true);
       };
     };

@@ -31,11 +31,14 @@ const typeDefs = gql`
 
   type Query {
     users: [User]
-    posts: [Post]
-    comments: [Comment]
-    user(_id: ID!): User
+    user(name: String!): User
+   
+
+    posts(name: String): [Post]
     post(_id: ID!): Post
+    comments: [Comment]
     comment(_id: ID!): Comment
+    me: User
   }
 
   # Set up an Auth type to handle returning data from a post creating or user login
