@@ -13,6 +13,22 @@ const resolvers = {
     },
 
     // return all posts and populate comments
+    // posts: async (parent, { name }) => {
+    //   const params = name ? { name } : {};
+    //   return Post.find(params).sort({ createdAt: -1 });
+
+    posts: async () => {
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .sort({ createdAt: -1 })
+        .populate('user');
+    },
+
     posts: async () => {
       return Post.find({})
         .populate({
@@ -55,31 +71,27 @@ const resolvers = {
   Mutation: {
     // add a user
     addUser: async (parent, { name, email, password }) => {
+      console.log(name, email, password);
       const user = await User.create({ name, email, password });
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { input }) => {
-      // Look up ther user by the provided email address. Since the `email` field is unique, we know that only one person will exist with that email.
-      const user = await User.findOne({ name: input.name });
 
-      // If there is no user with that email address, return an Authentication error stating so
+    login: async (parent, { input }) => {
+      const user = await User.findOne({ name: input.name });
+      console.log(user)
       if (!user) {
         throw new AuthenticationError('No user found with this name');
       }
 
-      // If there is a user found, execute the `isCorrectPassword` instance method and check if the correct password was provided
       const correctPw = await user.isCorrectPassword(input.password);
 
-      // If the password is incorrect, return an Authentication error stating so
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
 
-      // If email and password are correct, sign the token and return it to the client
       const token = signToken(user);
-
-      // Return an 'Auth' object that consists of the signed token and user's information
+      console.log(token)
       return { token, user };
     },
 
@@ -93,9 +105,28 @@ const resolvers = {
       return post;
     }, */
 
-    addPost: async (parent, args) => {
-      const post = await Post.create(args);
-      return post;
+    // addPost: async (parent, args) => {
+    //   const post = await Post.create(args);
+    //   return post;
+    // },
+
+    addPost: async (parent, { text }, context) => {
+      // console.log(text);
+      console.log("CONTEXT:  ",context.user);
+      if (context.user) {
+        const post = await Post.create({
+          text,
+          postAuthor: context.user.name,
+        });
+        console.log(post);
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { posts: post._id } }
+        );
+
+        return post;
+      }
+      throw new AuthenticationError('You need to be logged in');
     },
 
     // add a comment

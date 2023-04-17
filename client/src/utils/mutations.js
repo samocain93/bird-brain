@@ -30,16 +30,10 @@ export const ADD_USER = gql`
 export const ADD_POST = gql`
   mutation addPost($text: String!) {
     addPost(text: $text) {
-      user
+      _id
       text
-      image
-      likes
-      comments {
-         user
-         text
-         date
-      }
-    
+      postAuthor
+      createdAt
     }
   }
 `;

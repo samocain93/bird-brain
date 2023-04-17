@@ -17,19 +17,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
 const theme = createTheme();
 
 export default function SignIn() {
@@ -57,6 +44,7 @@ export default function SignIn() {
             const { data } = await login({
                 variables: { input: { ...formState } },
             });
+            console.log(data.login)
             Auth.login(data.login.token);
         } catch (e) {
             console.error(e);

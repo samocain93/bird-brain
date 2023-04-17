@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "18.12.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/index.js",
@@ -12,6 +15,7 @@
     "seed": "cd server && npm run seed",
     "dev": "nodemon server/index.js"
   },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
