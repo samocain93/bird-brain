@@ -16,8 +16,8 @@ const PostList = ({
       {showTitle && <h3>{title}</h3>}
       {posts &&
         posts.map((post) => (
-          <div key={post._id} className="card mb-3">
-            <h4 className="card-header bg-primary text-light p-2 m-0">
+          <div key={post._id} className="">
+            <h4 className="">
               {showName ? (
                 <Link
                   className="text-light"
