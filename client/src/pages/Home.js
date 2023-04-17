@@ -43,7 +43,7 @@ export default function PostCard() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const { loading, data } = useQuery(QUERY_POSTS);
   const posts = data?.posts || [];
-  console.log(posts);
+  console.log('posts', posts);
 
   React.useEffect(() => {
     // debugger

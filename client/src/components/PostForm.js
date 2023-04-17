@@ -43,26 +43,26 @@ const PostForm = () => {
   //     };
   //   };
   // });
-// console.log(Auth.getProfile())
+  // console.log(Auth.getProfile())
   const submitPost = async (event) => {
- 
+
     event.preventDefault();
 
     try {
       const { data } = await addPost({
         variables: {
-          text: postText, 
+          text: postText,
           // postAuthor: Auth.getProfile().data.name,
         },
       });
 
-      console.log(data);
+      console.log('data', data);
       setPostText("");
-      
+
     } catch (err) {
       console.error(err);
     }
-    console.log(postText);
+    console.log('postText', postText);
   };
 
   const handleChange = (event) => {
@@ -127,54 +127,53 @@ const PostForm = () => {
     //   </div>
     // </div>
     // <div>
-        <div className='postBox'>
-          <h2 className='postTitle'>What are you thinking today?</h2>
+    <div className='postBox'>
+      <h2 className='postTitle'>What are you thinking today?</h2>
 
-          {Auth.loggedIn() ? (
-            <>
-            <p
-              className={`m-0 ${
-                characterCount === 280 || error ? 'text-danger' : ''
+      {Auth.loggedIn() ? (
+        <>
+          <p
+            className={`m-0 ${characterCount === 280 || error ? 'text-danger' : ''
               }`}
-            >
-              Character Count: {characterCount}/100
-            </p>
-            <form
-              className=""
-              onSubmit={submitPost}
-            >
-              <div className="">
-                <textarea
-                  name="postText"
-                  placeholder="Soo what happened was..."
-                  id="text"
-                  value={postText}
-                  className="postInput"
-                  style={{ lineHeight: '1.5', lineWidth:'100', resize: 'both' }}
-                  onChange={handleChange}
-                ></textarea>
-              </div>
+          >
+            Character Count: {characterCount}/100
+          </p>
+          <form
+            className=""
+            onSubmit={submitPost}
+          >
+            <div className="">
+              <textarea
+                name="postText"
+                placeholder="Soo what happened was..."
+                id="text"
+                value={postText}
+                className="postInput"
+                style={{ lineHeight: '1.5', lineWidth: '100', resize: 'both' }}
+                onChange={handleChange}
+              ></textarea>
+            </div>
 
+            <div className="">
+              <button className="postButton" type="submit">
+                Post!
+              </button>
+            </div>
+            {error && (
               <div className="">
-                <button className="postButton" type="submit">
-                  Post!
-                </button>
+                {error.message}
               </div>
-              {error && (
-                <div className="">
-                  {error.message}
-                </div>
-              )}
-            </form>
-          </>
-          ) : (
-            <p>
-              You need to be logged in to post on your feed. Please{' '}
-              <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
-            </p>
-          )}
-          {/* {Auth.loggedIn() ? ( */}
-        </div>
+            )}
+          </form>
+        </>
+      ) : (
+        <p>
+          You need to be logged in to post on your feed. Please{' '}
+          <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
+        </p>
+      )}
+      {/* {Auth.loggedIn() ? ( */}
+    </div>
   );
 };
 

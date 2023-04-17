@@ -13,7 +13,7 @@ const resolvers = {
     },
 
     // return all posts and populate comments
-    posts: async (parent, { username }) => {
+    posts: async (parent, { name }) => {
       const params = name ? { name } : {};
       return Post.find(params).sort({ createdAt: -1 });
     },
@@ -73,7 +73,7 @@ const resolvers = {
         throw new AuthenticationError('No user found with this name');
       }
 
-      const correctPw = await user.isCorrectPassword( input.password);
+      const correctPw = await user.isCorrectPassword(input.password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
@@ -101,7 +101,7 @@ const resolvers = {
 
     addPost: async (parent, { text }, context) => {
       console.log(text);
-      console.log("THIS IS CONTEXT:  ",context.user);
+      console.log("THIS IS CONTEXT:  ", context.user);
       if (context.user) {
         const post = await Post.create({
           text,
@@ -113,8 +113,8 @@ const resolvers = {
           { $addToSet: { posts: post._id } }
         );
 
-        return post; 
-     }
+        return post;
+      }
       throw new AuthenticationError('You need to be logged in');
     },
 
