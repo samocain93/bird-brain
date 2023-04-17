@@ -13,11 +13,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 import { NavLink } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import Auth from '../utils/auth';
+import { Link } from "react-router-dom";
+import Auth from "../utils/auth";
 const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
-
 
 function Header() {
 
@@ -39,6 +38,7 @@ function Header() {
       };
     };
   }) ;
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -169,7 +169,9 @@ function Header() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
 
+
             {loggedIn && (
+
               <>
                 <Button 
                 sx={{ ml: "15px", right: 12 }} 
@@ -210,25 +212,26 @@ function Header() {
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
+                  
                 </Menu>
               </>
             )}{" "}
 
+
             {!loggedIn && (
+
               <>
                 <Button
                   sx={{ ml: "15px" }}
                   variant="contained"
                   color="secondary"
                 >
-                  <Link to='/Signup'>
-                  Register
-                  </Link>
+                  <Link to="/Signup">Register</Link>
                 </Button>
+
+
                 <Button sx={{ ml: "15px" }} variant="contained">
-                <Link to='/Login'>
-                  Login
-                  </Link>
+                  <Link to="/Login">Login</Link>
                 </Button>
               </>
             )}

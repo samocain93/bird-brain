@@ -1,3 +1,4 @@
+
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -60,13 +61,25 @@ export default function PostCard() {
     }
   });
 
+  const [addPost, {error}] = useMutation(ADD_POST); 
+  const [postvalue, setpostvalue] = React.useState("");
+  //   const userInfo = Auth.getProfile();
+  //   console.log(userInfo);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+  
+   async function submit() { 
+      const {data} = await addPost({
+         variables: {text:postvalue}
+      });
+  }
 
   return (
 
     <Grid container spacing={2}>
+
       <div>
         <PostForm />
       </div>
@@ -199,6 +212,7 @@ export default function PostCard() {
           <Paper>{FriendNoteCard}</Paper>
         </Grid>
       )}
+
     </Grid>
 
     // {loading === false
@@ -216,5 +230,3 @@ export default function PostCard() {
     // </Container>
   );
 }
-
-// console.log(FriendNoteCard);
