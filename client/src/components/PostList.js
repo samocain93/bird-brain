@@ -10,7 +10,7 @@ const PostList = ({
 }) => {
   if (!posts.length) {
     return <h3
-    style={{marginTop: '15px'}}>Posts Will Show Here!</h3>;
+    style={{marginTop: '15px', textAlign: 'center'}}>Posts Will Show Here!</h3>;
   }
 
   return (
@@ -28,7 +28,7 @@ const PostList = ({
                 >
                   {post.user} <br />
                   <span style={{ fontSize: '1rem' }}>
-                    had this thought on {post.createdAt}
+                    Posted on {post.createdAt}
                   </span>
                 </Link>
               ) : (

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { ADD_POST } from '../utils/mutations';
-import { QUERY_POSTS, QUERY_ME } from '../utils/queries';
+import { QUERY_POSTS} from '../utils/queries';
 import Auth from '../utils/auth';
 
 const PostForm = () => {
@@ -14,7 +14,9 @@ const PostForm = () => {
   const [addPost, { error }] = useMutation(ADD_POST, {
 
     update(cache, { data: { addPost } }) {
+
       try {
+        
         const { posts } = cache.readQuery({ query: QUERY_POSTS });
 
         cache.writeQuery({

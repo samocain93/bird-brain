@@ -13,21 +13,21 @@ const resolvers = {
     },
 
     // return all posts and populate comments
-    posts: async (parent, { name }) => {
-      const params = name ? { name } : {};
-      return Post.find(params).sort({ createdAt: -1 });
-    },
-
-    // posts: async () => {
-    //   return Post.find({})
-    //     .populate({
-    //       path: 'comments',
-    //     })
-    //     .populate({
-    //       path: 'comments.user',
-    //     })
-    //     .populate('user');
+    // posts: async (parent, { name }) => {
+    //   const params = name ? { name } : {};
+    //   return Post.find(params).sort({ createdAt: -1 });
     // },
+
+    posts: async () => {
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .populate('user');
+    },
 
     // return a single user
     user: async (parent, args) => {

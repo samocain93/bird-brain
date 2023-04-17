@@ -10,7 +10,7 @@ module.exports = {
       console.log("Lets go Middlewareee");
       console.log("body:", req.body.token);
       console.log("headers:", req.headers.authorization);
-      consoel.log("query:", req.query.token);
+      console.log("query:", req.query.token);
 
         let token = req.body.token || req.query.token || req.headers.authorization;
 

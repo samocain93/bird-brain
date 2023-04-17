@@ -10,6 +10,7 @@ query Posts {
     text
     image
     likes
+    createdAt
     comments {
       user {
         name
@@ -18,6 +19,17 @@ query Posts {
   }
 }
 `;
+
+// export const QUERY_POSTS = gql`
+// query getPosts {
+//   posts {
+//     _id
+//     text
+//     image
+//     likes
+//     }
+//   }
+// `;
 
 export const QUERY_POST = gql`
   query Post($id: ID!) {
