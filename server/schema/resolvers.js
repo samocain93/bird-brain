@@ -13,16 +13,21 @@ const resolvers = {
     },
 
     // return all posts and populate comments
-    posts: async () => {
-      return Post.find({})
-        .populate({
-          path: 'comments',
-        })
-        .populate({
-          path: 'comments.user',
-        })
-        .populate('user');
+    posts: async (parent, { username }) => {
+      const params = name ? { name } : {};
+      return Post.find(params).sort({ createdAt: -1 });
     },
+
+    // posts: async () => {
+    //   return Post.find({})
+    //     .populate({
+    //       path: 'comments',
+    //     })
+    //     .populate({
+    //       path: 'comments.user',
+    //     })
+    //     .populate('user');
+    // },
 
     // return a single user
     user: async (parent, args) => {
@@ -60,20 +65,22 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
     login: async (parent, { input }) => {
       const user = await User.findOne({ name: input.name });
-
+      console.log(user)
       if (!user) {
         throw new AuthenticationError('No user found with this name');
       }
 
-      const correctPw = await user.isCorrectPassword(input.password);
+      const correctPw = await user.isCorrectPassword( input.password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
       }
 
       const token = signToken(user);
+      console.log(token)
       return { token, user };
     },
 
@@ -93,20 +100,22 @@ const resolvers = {
     // },
 
     addPost: async (parent, { text }, context) => {
+      console.log(text);
+      console.log("THIS IS CONTEXT:  ",context.user);
       if (context.user) {
-        const post = await post.create({
+        const post = await Post.create({
           text,
-          name: context.user.name,
+          postAuthor: context.user.name,
         });
-
+        console.log(post);
         await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { posts: post._id } }
         );
 
-        return post;
-      }
-      throw new AuthenticationError('You need to be logged in!');
+        return post; 
+     }
+      throw new AuthenticationError('You need to be logged in');
     },
 
     // add a comment
