@@ -14,14 +14,14 @@ export default function ProfileNoteCard({ post }) {
                             <DeleteForeverTwoTone/> 
                         </IconButton>
                     }
-                    title='Card Title' 
+                    title={post.user.name}
                 />
                 {/*CONTENT DISPLAY on line 17 where " title='Card Title' " is */}
                 <CardContent>
                     <Typography variant="p"
 
                     >
-                        Card Content {/* CONTENT DISPLAY */}
+                        {post.text}
                     </Typography>
                     <IconButton aria-label="">
                         
