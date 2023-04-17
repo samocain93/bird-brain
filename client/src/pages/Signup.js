@@ -1,46 +1,3 @@
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { useMutation } from '@apollo/client';
-// import { ADD_USER } from '..utils/mutations';
-// import Auth from '../utils/auth';
-
-// const Signup = () => {
-//     const [formState, setFormState] = useState({
-//         username: '',
-//         email: '',
-//         password: '',
-//     });
-
-//     const [addUser, { error, data }] = useMutation(ADD_USER);
-
-//     const submitForm = async (event) => {
-//         event.preventDefault();
-//         console.log(formState);
-
-//         try {
-//             const { data } = await addUser({
-//                 variables: { ...formState },
-//             });
-
-//             Auth.login(data.addUser.token);
-//         } catch (e) {
-//             console.error(e);
-//         }
-//     };
-
-//     return (
-//         <main>
-//             <div>
-//                 <div>
-                    
-//                 </div>
-//             </div>
-//         </main>
-//     );
-// };
-
-// export default Signup;
-
 import * as React from 'react';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client'
@@ -60,19 +17,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
-
 const theme = createTheme();
 
 export default function SignUp() {
@@ -86,37 +30,37 @@ export default function SignUp() {
   //   });
   // };
 
-      const [formState, setFormState] = useState({
-        name: '',
-        email: '',
-        password: '',
+  const [formState, setFormState] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const [AddUser, { error, data }] = useMutation(ADD_USER);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
     });
+  };
 
-    const [addUser, { error, data }] = useMutation(ADD_USER);
+  const submitForm = async (event) => {
+    event.preventDefault();
+    console.log(formState);
 
-    const handleChange = (event) => {
-      const { name, value } = event.target;
-  
-      setFormState({
-        ...formState,
-        [name]: value,
+    try {
+      const { data } = await AddUser({
+        variables: { name: formState.name, email: formState.email, password: formState.password },
       });
-    };
 
-    const submitForm = async (event) => {
-        event.preventDefault();
-        console.log(formState);
-
-        try {
-            const { data } = await addUser({
-                variables: { ...formState },
-            });
-
-            Auth.login(data.addUser.token);
-        } catch (e) {
-            console.error(e);
-        }
-    };
+      Auth.login(data.AddUser.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -138,27 +82,27 @@ export default function SignUp() {
           </Typography>
 
           {data ? (
-          <Typography>
-            Success! You may now head{' '}
-            <Link to="/">back to the homepage.</Link>
-          </Typography>
-        ) : (
-          
-          <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} >
-                <TextField
-                  autoComplete="first-name"
-                  name="name"
-                  required
-                  fullWidth
-                  id="name"
-                  label="Name"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Grid>
-              {/* <Grid item xs={12} sm={6}>
+            <Typography>
+              Success! You may now head{' '}
+              <Link to="/">back to the homepage.</Link>
+            </Typography>
+          ) : (
+
+            <Box component="form" noValidate onSubmit={submitForm} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} >
+                  <TextField
+                    autoComplete="first-name"
+                    name="name"
+                    required
+                    fullWidth
+                    id="name"
+                    label="Name"
+                    autoFocus
+                    onChange={handleChange}
+                  />
+                </Grid>
+                {/* <Grid item xs={12} sm={6}>
                 <TextField
                   required
                   fullWidth
@@ -168,44 +112,48 @@ export default function SignUp() {
                   autoComplete="family-name"
                 />
               </Grid>  */}
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChange}
-                />
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="email"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="new-password"
+                    onChange={handleChange}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                  onChange={handleChange}
-                />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
               </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-            </Grid> 
-          </Box>
-         )}
+            </Box>
+          )}
           {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>  */}
-          
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">
+              {error.message}
+            </div>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

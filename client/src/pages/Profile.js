@@ -1,10 +1,33 @@
 import { Container, Box, Avatar, Grid, Typography } from "@mui/material";
 import { useTheme, ThemeProvider } from "@mui/material/styles";
-
+// import { useEffect, useState } from 'react';
+import { useQuery } from "@apollo/client";
 import ProfileNoteCard from "../components/ProfileNoteCard";
+import { QUERY_POST } from "../utils/queries";
 
-function Profile() {
+const Profile = () => {
+  // const [posts, setPosts] = useState(null);
+
+  // useEffect(() => {
+  //   const fetchPosts = async () => {
+  //     const response = await fetch('/api/profile');
+  //     const json = await response.json();
+
+  //     if (response.ok) {
+  //       setPosts(json)
+  //     }
+  //   }
+
+  //   fetchPosts();
+  // }, [])
   const prof_theme = useTheme();
+
+  const { data, loading, error } = useQuery(QUERY_POST);
+  if (loading) return "Loading...";
+  if (error) return <pre>{error.message}</pre>
+
+  console.log(data);
+
   return (
     <ThemeProvider theme={prof_theme}>
       <Container>
@@ -68,12 +91,13 @@ function Profile() {
         
           {/* function below should map all of user's posts to grid once backend is connected, 
         for now a sample grid is provided.*/}
-          {/* {posts.map(post => (
-          <Grid item key={post.id}>
-            <NoteCard>{ post.content }</NoteCard>
+          {data.map(post => (
+          <Grid item key={post.id} xs={12} md={6} lg={4}>
+            <ProfileNoteCard>{ post.content }</ProfileNoteCard>
           </Grid>
-        ))} */}
-          <Grid item xs={12} md={6} lg={4}>
+        ))}
+
+          {/* <Grid item xs={12} md={6} lg={4}>
             <ProfileNoteCard></ProfileNoteCard>
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
@@ -87,7 +111,7 @@ function Profile() {
           </Grid>
           <Grid item xs={12} md={6} lg={4}>
             <ProfileNoteCard></ProfileNoteCard>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </ThemeProvider>

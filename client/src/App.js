@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import { Routes, Route } from "react-router-dom";
 import { setContext } from '@apollo/client/link/context';
 import Layout from "./components/Layout";
@@ -15,12 +16,12 @@ import {
   InMemoryCache,
   createHttpLink } from '@apollo/client';
 
-const httpLink =createHttpLink({
+const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('');
+  const token = localStorage.getItem('id_token');
 
   return {
     headers: {

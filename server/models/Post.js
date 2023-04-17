@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const dateFormat = require('../utils/date');
 
 const postSchema = new Schema({
   user: {
@@ -15,6 +16,16 @@ const postSchema = new Schema({
   likes: {
     type: Number,
     default: 0,
+  },
+  postAuthor: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+    get: (timestamp) => dateFormat(timestamp),
   },
   comments: [
     {
