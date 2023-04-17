@@ -69,13 +69,19 @@ const PostList = ({
               borderRadius: '16px',
             }}
             >
-              <CardHeader
+              <CardHeader 
+              sx={{
+                fontSize: '30px'
+              }}
+              style={{
+                fontSize: "30"
+              }}
               avatar={
                 <Avatar
                   sx={{ bgcolor: 'secondary.main' }}
                   aria-label='recipe'
                 >
-                  R
+                  C
                 </Avatar>
                 
               }
