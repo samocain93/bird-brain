@@ -16,6 +16,20 @@ const resolvers = {
     // posts: async (parent, { name }) => {
     //   const params = name ? { name } : {};
     //   return Post.find(params).sort({ createdAt: -1 });
+    posts: async (parent, { name }) => {
+      const params = name ? { name } : {};
+      return Post.find(params).sort({ createdAt: -1 });
+    },
+
+    // posts: async () => {
+    //   return Post.find({})
+    //     .populate({
+    //       path: 'comments',
+    //     })
+    //     .populate({
+    //       path: 'comments.user',
+    //     })
+    //     .populate('user');
     // },
 
     posts: async () => {
@@ -73,7 +87,7 @@ const resolvers = {
         throw new AuthenticationError('No user found with this name');
       }
 
-      const correctPw = await user.isCorrectPassword( input.password);
+      const correctPw = await user.isCorrectPassword(input.password);
 
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
@@ -113,8 +127,8 @@ const resolvers = {
           { $addToSet: { posts: post._id } }
         );
 
-        return post; 
-     }
+        return post;
+      }
       throw new AuthenticationError('You need to be logged in');
     },
 
