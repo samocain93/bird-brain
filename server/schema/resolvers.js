@@ -16,21 +16,18 @@ const resolvers = {
     // posts: async (parent, { name }) => {
     //   const params = name ? { name } : {};
     //   return Post.find(params).sort({ createdAt: -1 });
-    posts: async (parent, { name }) => {
-      const params = name ? { name } : {};
-      return Post.find(params).sort({ createdAt: -1 });
-    },
 
-    // posts: async () => {
-    //   return Post.find({})
-    //     .populate({
-    //       path: 'comments',
-    //     })
-    //     .populate({
-    //       path: 'comments.user',
-    //     })
-    //     .populate('user');
-    // },
+    posts: async () => {
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .sort({ createdAt: -1 })
+        .populate('user');
+    },
 
     posts: async () => {
       return Post.find({})

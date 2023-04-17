@@ -9,7 +9,6 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-// import { red } from "@mui/material/colors";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -17,18 +16,12 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Grid from '@mui/material/Unstable_Grid2/Grid2';
 import { Paper } from '@mui/material';
 import FriendNoteCard from '../components/FriendNoteCard';
-// import InputUnstyled from '@mui/base/InputUnstyled';
-// import Input from '@mui/joy/Input';
-// import Textarea from '@mui/joy/Textarea';
-// import TextField from '@mui/material/TextField';
 import PostList from '../components/PostList';
 // import PostList2 from '../components/PostList';
 import PostForm from '../components/PostForm';
 import { useQuery } from '@apollo/client';
 import { QUERY_POSTS } from '../utils/queries';
 import Auth from '../utils/auth';
-// import { QUERY_POSTS } from '../utils/queries';
-// import { useQuery } from '@apollo/client';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -77,10 +70,14 @@ export default function PostCard() {
       {loggedIn && (
         <Grid item xs={6}>
           <div>
-          {/* <PostList
+          <PostList 
+              sx={{
+                marginTop: '40px'
+              }}
               posts={posts}
-              title="Some Posts"
-            /> */}
+              title="Your Posts"
+            />
+            {/* <PostList2 /> */}
           </div>
           {loading === false
             ? posts.map((post) => {
