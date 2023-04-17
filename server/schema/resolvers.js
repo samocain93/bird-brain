@@ -100,7 +100,7 @@ const resolvers = {
     // },
 
     addPost: async (parent, { text }, context) => {
-      console.log(text);
+      // console.log(text);
       console.log("CONTEXT:  ",context.user);
       if (context.user) {
         const post = await Post.create({
