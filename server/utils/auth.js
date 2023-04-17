@@ -11,7 +11,7 @@ module.exports = {
       //console.log("headersssss",req.headers.authorization)
       //consoel.log("query",req.query.token)
         let token = req.body.token || req.query.token || req.headers.authorization;
-      console.log("We're in the Middleware babyyyy 😎", token)
+          console.log("We're in the Middleware babyyyy 😎", token)
         if (req.headers.authorization) {
           token = token.split(' ').pop().trim();
         }
