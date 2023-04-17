@@ -1,46 +1,3 @@
-// import React, { useState } from 'react';
-// import { Link } from 'react-router-dom';
-// import { useMutation } from '@apollo/client';
-// import { ADD_USER } from '..utils/mutations';
-// import Auth from '../utils/auth';
-
-// const Signup = () => {
-//     const [formState, setFormState] = useState({
-//         username: '',
-//         email: '',
-//         password: '',
-//     });
-
-//     const [addUser, { error, data }] = useMutation(ADD_USER);
-
-//     const submitForm = async (event) => {
-//         event.preventDefault();
-//         console.log(formState);
-
-//         try {
-//             const { data } = await addUser({
-//                 variables: { ...formState },
-//             });
-
-//             Auth.login(data.addUser.token);
-//         } catch (e) {
-//             console.error(e);
-//         }
-//     };
-
-//     return (
-//         <main>
-//             <div>
-//                 <div>
-                    
-//                 </div>
-//             </div>
-//         </main>
-//     );
-// };
-
-// export default Signup;
-
 import * as React from 'react';
 import { useState } from 'react';
 import { useMutation } from '@apollo/client'
@@ -59,19 +16,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
 
 const theme = createTheme();
 
@@ -205,7 +149,11 @@ export default function SignUp() {
           </Box>
          )}
           {/* <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>  */}
-          
+          {error && (
+            <div className="my-3 p-3 bg-danger text-white">
+              {error.message}
+            </div>
+          )}
         </Box>
       </Container>
     </ThemeProvider>

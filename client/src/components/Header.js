@@ -6,11 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
 import FlutterDashIcon from "@mui/icons-material/FlutterDash";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -19,20 +19,25 @@ const pages = ["Friends", "Profile"];
 const settings = ["Account", "Dashboard", "Logout"];
 
 function Header() {
-  // const isLoggedIn = false;
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [loggedIn, setLoggedIn] = React.useState(false);
-
-  React.useEffect(() => {
-    //  debugger
+  
+  React.useEffect (()=>{
+    // debugger
     const get = Auth.getToken();
-    if (get) {
-      if (Auth.isTokenExpired(get) && Auth.loggedIn()) {
+    if(get) {
+       (Auth.isTokenExpired(get) && Auth.loggedIn()); {
         setLoggedIn(true);
-      }
-    }
-  });
+      };
+    };
+  }) ;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -150,10 +155,10 @@ function Header() {
               <Button
                 key={page}
                 component={NavLink}
+                to={`/${page.toLowerCase()}`}
                 style={({ isActive }) => ({
                   color: isActive ? "#FFFFFF" : "#000000",
                 })}
-                to={`/${page.toLowerCase()}`}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
@@ -161,10 +166,18 @@ function Header() {
               </Button>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
-            {!loggedIn && (
+
+            {loggedIn && (
               <>
+                <Button 
+                sx={{ ml: "15px", right: 12 }} 
+                variant="contained"
+                onClick={logout}>
+                  <Link to='/Login'>
+                    Logout
+                  </Link>
+                </Button>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar src="/broken-image.jpg" />
@@ -187,7 +200,12 @@ function Header() {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem 
+                    key={setting} 
+                    onClick={handleCloseUserMenu}
+                    component={NavLink}
+                    to={`/${setting.toLowerCase()}`}
+                    >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
@@ -195,7 +213,8 @@ function Header() {
                 </Menu>
               </>
             )}{" "}
-            {loggedIn && (
+
+            {!loggedIn && (
               <>
                 <Button
                   sx={{ ml: "15px" }}
@@ -204,7 +223,6 @@ function Header() {
                 >
                   <Link to="/Signup">Register</Link>
                 </Button>
-
                 <Button sx={{ ml: "15px" }} variant="contained">
                   <Link to="/Login">Login</Link>
                 </Button>
