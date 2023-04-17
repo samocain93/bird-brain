@@ -175,7 +175,7 @@ function Header() {
                 sx={{ ml: "15px", right: 12 }} 
                 variant="contained"
                 onClick={logout}>
-                  <Link to='/Login'>
+                  <Link to='/'>
                     Logout
                   </Link>
                 </Button>
