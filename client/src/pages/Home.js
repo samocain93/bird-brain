@@ -21,8 +21,10 @@ import FriendNoteCard from "../components/FriendNoteCard";
 // import Input from '@mui/joy/Input';
 // import Textarea from '@mui/joy/Textarea';
 // import TextField from '@mui/material/TextField';
-// import PostList from '../components/PostList';
+import PostList from '../components/PostList';
 import PostForm from '../components/PostForm';
+import { useQuery } from '@apollo/client';
+import { QUERY_POSTS } from '../utils/queries';
 import Auth from '../utils/auth';
 
 const ExpandMore = styled((props) => {
@@ -40,7 +42,9 @@ export default function PostCard() {
 
   const [expanded, setExpanded] = React.useState(false);
    const [loggedIn, setLoggedIn] = React.useState(false);
-
+   const { loading, data } = useQuery(QUERY_POSTS);
+   const posts = data?.posts || [];
+   
      React.useEffect (()=>{
     // debugger
     const get = Auth.getToken();
@@ -77,7 +81,18 @@ export default function PostCard() {
         border="5 px"
         borderRadius="2rem"
       /> */}
+      <div>
       <PostForm />
+      </div>
+      {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <PostList 
+            posts={posts}
+            title="Post something here"
+            />
+          )}
+
       {loggedIn && (
     <Grid item xs={6}>
     <Card
