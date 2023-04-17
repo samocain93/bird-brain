@@ -11,17 +11,6 @@ const PostForm = () => {
   const [postText, setPostText] = useState('');
   const [characterCount, setCharacterCount] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
-
-  useEffect (()=>{
-    // debugger
-    const get = Auth.getToken();
-    if(get) {
-       (Auth.isTokenExpired(get) && Auth.loggedIn()); {
-        setLoggedIn(true);
-      };
-    };
-  }) ;
-
   const [addPost, { error }] = useMutation(ADD_POST, {
 
     update(cache, { data: { addPost } }) {
@@ -45,14 +34,24 @@ const PostForm = () => {
     },
   });
 
+  useEffect (()=>{
+    // debugger
+    const get = Auth.getToken();
+    if(get) {
+       (Auth.isTokenExpired(get) && Auth.loggedIn()); {
+        setLoggedIn(true);
+      };
+    };
+  }) ;
+
   const submitPost = async (event) => {
     event.preventDefault();
 
     try {
       const { data } = await addPost({
         variables: {
-          postText,
-          name: Auth.getProfile().data.name,
+          text:  postText 
+          // name: Auth.getProfile().data.name,
         },
       });
 
@@ -60,6 +59,7 @@ const PostForm = () => {
     } catch (err) {
       console.error(err);
     }
+    console.log(postText);
   };
 
   const handleChange = (event) => {
@@ -93,6 +93,7 @@ const PostForm = () => {
                 <textarea
                   name="postText"
                   placeholder="Soo what happened was..."
+                  id="text"
                   value={postText}
                   className="postInput"
                   style={{ lineHeight: '1.5', lineWidth:'100', resize: 'both' }}

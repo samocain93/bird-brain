@@ -1,7 +1,7 @@
 import { Container, Box, Avatar, Grid, Typography } from "@mui/material";
 import { useTheme, ThemeProvider } from "@mui/material/styles";
 // import { useEffect, useState } from 'react';
-import { useQuery, gql } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import ProfileNoteCard from "../components/ProfileNoteCard";
 import { QUERY_POST } from "../utils/queries";
 
