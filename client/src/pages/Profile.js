@@ -23,10 +23,8 @@ const Profile = () => {
   const prof_theme = useTheme();
 
   const { data, loading, error } = useQuery(QUERY_POST);
-
   if (loading) return "Loading...";
   if (error) return <pre>{error.message}</pre>
-
 
   console.log(data);
 
