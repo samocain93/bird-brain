@@ -13,21 +13,32 @@ const resolvers = {
     },
 
     // return all posts and populate comments
-    posts: async (parent, { name }) => {
-      const params = name ? { name } : {};
-      return Post.find(params).sort({ createdAt: -1 });
+    // posts: async (parent, { name }) => {
+    //   const params = name ? { name } : {};
+    //   return Post.find(params).sort({ createdAt: -1 });
+
+    posts: async () => {
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .sort({ createdAt: -1 })
+        .populate('user');
     },
 
-    // posts: async () => {
-    //   return Post.find({})
-    //     .populate({
-    //       path: 'comments',
-    //     })
-    //     .populate({
-    //       path: 'comments.user',
-    //     })
-    //     .populate('user');
-    // },
+    posts: async () => {
+      return Post.find({})
+        .populate({
+          path: 'comments',
+        })
+        .populate({
+          path: 'comments.user',
+        })
+        .populate('user');
+    },
 
     // return a single user
     user: async (parent, args) => {
@@ -100,8 +111,8 @@ const resolvers = {
     // },
 
     addPost: async (parent, { text }, context) => {
-      console.log(text);
-      console.log("THIS IS CONTEXT:  ", context.user);
+      // console.log(text);
+      console.log("CONTEXT:  ",context.user);
       if (context.user) {
         const post = await Post.create({
           text,

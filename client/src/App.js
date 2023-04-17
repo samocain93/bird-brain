@@ -16,7 +16,7 @@ import {
   InMemoryCache,
   createHttpLink } from '@apollo/client';
 
-const httpLink =createHttpLink({
+const httpLink = createHttpLink({
   uri: '/graphql',
 });
 
