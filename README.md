@@ -18,11 +18,10 @@ To install the Bird Brain application, start by cloning the repository. Once you
 
 ## Usage
 
-[Bird Brain](link)
+[Bird Brain](https://birdbrain.herokuapp.com/)
 
 ![Bird Brain image 1](./public/assets/images/bird-brain-1.png)
 ![Bird Brain image 2](./public/assets/images/bird-brain-2.png)
-![Bird Brain image 3](./public/assets/images/bird-brain-3.png)
 
 ## License
 
