@@ -6,12 +6,12 @@ const expiration = '5h';
 module.exports = {
 
     authMiddleware: function ({ req }) {
-      console.log("HHHHHHHHHHHHHHHHHHHHHH")
+      console.log("Lets go Middlewareee")
       //console.log("body:-->",req.body.token)
       //console.log("headersssss",req.headers.authorization)
       //consoel.log("query",req.query.token)
         let token = req.body.token || req.query.token || req.headers.authorization;
-      console.log("in the authmiddleware", token)
+      console.log("We're in the Middleware babyyyy 😎", token)
         if (req.headers.authorization) {
           token = token.split(' ').pop().trim();
         }

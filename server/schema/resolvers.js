@@ -13,7 +13,7 @@ const resolvers = {
     },
 
     // return all posts and populate comments
-    posts: async (parent, { username }) => {
+    posts: async (parent, { name }) => {
       const params = name ? { name } : {};
       return Post.find(params).sort({ createdAt: -1 });
     },
@@ -102,7 +102,7 @@ const resolvers = {
 
     addPost: async (parent, { text }, context) => {
       console.log(text);
-      console.log("THIS IS CONTEXT:  ",context.user);
+      console.log("CONTEXT:  ",context.user);
       if (context.user) {
         const post = await Post.create({
           text,

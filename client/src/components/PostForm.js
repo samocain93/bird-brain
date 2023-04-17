@@ -52,7 +52,7 @@ const PostForm = () => {
       const { data } = await addPost({
         variables: {
           text: postText, 
-          // postAuthor: Auth.getProfile().data.name,
+          postAuthor: Auth.getProfile().data.name,
         },
       });
 
@@ -62,7 +62,6 @@ const PostForm = () => {
     } catch (err) {
       console.error(err);
     }
-    console.log(postText);
   };
 
   const handleChange = (event) => {

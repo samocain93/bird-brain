@@ -84,6 +84,12 @@ export default function PostCard() {
       <div>
       <PostForm />
       </div>
+
+
+
+      {loggedIn && (
+    <Grid item xs={6}>
+            <div>
       {loading ? (
             <div>Loading...</div>
           ) : (
@@ -92,9 +98,7 @@ export default function PostCard() {
             title="Post something here"
             />
           )}
-
-      {loggedIn && (
-    <Grid item xs={6}>
+      </div>
     <Card
       sx={{
         width: "345",

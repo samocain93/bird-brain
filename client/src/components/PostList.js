@@ -2,16 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PostList = ({
+
   posts,
   title,
   showTitle = true,
   showName = true,
 }) => {
   if (!posts.length) {
-    return <h3>No Posts Yet</h3>;
+    return <h3
+    style={{marginTop: '15px'}}>Posts Will Show Here!</h3>;
   }
 
   return (
+
     <div>
       {showTitle && <h3>{title}</h3>}
       {posts &&
@@ -20,7 +23,7 @@ const PostList = ({
             <h4 className="">
               {showName ? (
                 <Link
-                  className="text-light"
+                  className=""
                   to={`/profiles/${post.user}`}
                 >
                   {post.user} <br />
@@ -36,11 +39,11 @@ const PostList = ({
                 </>
               )}
             </h4>
-            <div className="card-body bg-light p-2">
+            <div className="">
               <p>{post.text}</p>
             </div>
             <Link
-              className="btn btn-primary btn-block btn-squared"
+              className=""
               to={`/posts/${post._id}`}
             >
               Comment

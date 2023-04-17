@@ -21,7 +21,6 @@ const typeDefs = gql`
     postAuthor: String
     comments: [Comment]
     createdAt: String
-    date: String
   }
 
   type Comment {
