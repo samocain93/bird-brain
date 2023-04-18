@@ -48,7 +48,7 @@ const PostList = ({
 
   return (
 
-    <div>
+    <div style={{marginBottom: "180px"}}>
 
       {showTitle && <h3>{title}</h3>}
       {posts &&
