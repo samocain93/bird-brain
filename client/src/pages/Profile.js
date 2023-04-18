@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import ProfileNoteCard from "../components/ProfileNoteCard";
 import { QUERY_POST } from "../utils/queries";
 
-const Profile = () => {
+function Profile() {
   // const [posts, setPosts] = useState(null);
 
   // useEffect(() => {
@@ -22,11 +22,11 @@ const Profile = () => {
   // }, [])
   const prof_theme = useTheme();
 
-  const { data, loading, error } = useQuery(QUERY_POST);
-  if (loading) return "Loading...";
-  if (error) return <pre>{error.message}</pre>
+  // const { data, loading, error } = useQuery(QUERY_POST);
+  // if (loading) return "Loading...";
+  // if (error) return <pre>{error.message}</pre>
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <ThemeProvider theme={prof_theme}>
@@ -91,11 +91,11 @@ const Profile = () => {
         
           {/* function below should map all of user's posts to grid once backend is connected, 
         for now a sample grid is provided.*/}
-          {data.map(post => (
+          {/* {data.map(post => (
           <Grid item key={post.id} xs={12} md={6} lg={4}>
             <ProfileNoteCard>{ post.content }</ProfileNoteCard>
           </Grid>
-        ))}
+        ))} */}
 
           {/* <Grid item xs={12} md={6} lg={4}>
             <ProfileNoteCard></ProfileNoteCard>
