@@ -29,7 +29,11 @@ function Profile() {
   // console.log(data);
 
   return (
-    <ThemeProvider theme={prof_theme}>
+    <ThemeProvider
+    theme={prof_theme}
+    sx={{marginTop: '40px'}}
+    style={{marginTop: "40px"}}
+    >
       <Container>
         <Grid container
 
