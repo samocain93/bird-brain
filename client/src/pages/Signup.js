@@ -48,7 +48,7 @@ export default function SignUp() {
   };
 
   const submitForm = async (event) => {
-    debugger
+    // debugger
     event.preventDefault();
     console.log(formState);
 
