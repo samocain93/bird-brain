@@ -48,15 +48,17 @@ export default function SignUp() {
   };
 
   const submitForm = async (event) => {
+    // debugger
     event.preventDefault();
     console.log(formState);
 
     try {
       const { data } = await AddUser({
-        variables: { name: formState.name, email: formState.email, password: formState.password },
+        variables: { ... formState },
+        // variables: { name: formState.name, email: formState.email, password: formState.password },
       });
 
-      Auth.login(data.AddUser.token);
+      Auth.login(data.addUser.token);
     } catch (e) {
       console.error(e);
     }
